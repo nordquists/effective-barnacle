@@ -112,6 +112,7 @@ int main(int argc, char *argv[]){
       for (i = 0; i < received[process]; i++) { 
         fprintf(fp, "%d \n", results[disp[process] + i]); 
         printf("result %d\n", results[disp[process] + i]);
+        printf("ddd %d\n", process);
       }
     }
 

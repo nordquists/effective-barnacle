@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
   printf("curr %d\n", curr);
   for ( i = 0 ; i < size ; i++ )
     {
-        received[i] = 0 ;
+        received[i] = -1 ;
     }
 
   if (rank == 0) {

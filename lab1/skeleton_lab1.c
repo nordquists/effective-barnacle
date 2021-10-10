@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
 
   if (rank == 0) {
     int* b = malloc(n*sizeof(int));
-    MPI_Gatherv(&local_array, curr, MPI_INT, b, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gatherv(&local_array, curr, MPI_INT, &results, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");
@@ -111,9 +111,9 @@ int main(int argc, char *argv[]){
     //Write the numbers divisible by x in the file as indicated in the lab description.
 
     for(i=0;i<=received[0] + received[1];i++){ 
-      fprintf(fp, "%d \n", b[i]); 
+      fprintf(fp, "%d \n", results[i]); 
       printf("result %d\n", 
-        b[i]);
+        results[i]);
     } 
 
     fclose(fp);

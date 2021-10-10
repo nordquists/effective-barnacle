@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
 
   if (rank == 0) {
     int* b = malloc(n*sizeof(int));
-    MPI_Gatherv(&local_array, curr, MPI_INT, &b, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gatherv(&local_array, curr, MPI_INT, b, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");

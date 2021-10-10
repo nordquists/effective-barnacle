@@ -66,6 +66,9 @@ int main(int argc, char *argv[]){
   int curr = 0;
 
   for (int num = 2 + rank; num <= n; num = num + size) {
+    printf("process %d: n = %d\n", 
+        rank,
+        num);
     if (num % x == 0) {
       local_array[curr] = x;
       curr++;

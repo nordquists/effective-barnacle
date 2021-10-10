@@ -108,7 +108,9 @@ int main(int argc, char *argv[]){
     //Write the numbers divisible by x in the file as indicated in the lab description.
 
     for(i=0;i<=received[0] + received[1];i++){ 
-      fprintf(fp, "%d \n", local_array[i]); 
+      fprintf(fp, "%d \n", results[i]); 
+      printf("result %d\n", 
+        results[i]);
     } 
 
     fclose(fp);

@@ -96,7 +96,6 @@ int main(int argc, char *argv[]){
   start_p3 = clock();
 
   if (rank == 0) {
-    int* b = malloc(n*sizeof(int));
     MPI_Gatherv(&local_array, curr, MPI_INT, &results, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);
@@ -109,12 +108,20 @@ int main(int argc, char *argv[]){
     }
 
     //Write the numbers divisible by x in the file as indicated in the lab description.
+    for(int process = 0; process < n; process++) {
+      for(i = 0; i <= received[process]; i++){ 
+        fprintf(fp, "%d \n", results[disp[process] + i]); 
+        printf("result %d\n", 
+          results[disp[process] + i]);
+      }
+    }
 
-    for(i=0;i<=received[0] + received[1];i++){ 
-      fprintf(fp, "%d \n", results[i]); 
-      printf("result %d\n", 
-        results[i]);
-    } 
+
+    // for(i=0;i<=received[0] + received[1];i++){ 
+    //   fprintf(fp, "%d \n", results[i]); 
+    //   printf("result %d\n", 
+    //     results[i]);
+    // } 
 
     fclose(fp);
   } else {

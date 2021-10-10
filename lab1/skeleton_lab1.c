@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
     }
   }
 
-  MPI_Gather(local_array, curr, MPI_INT, local_array, n, MPI_INT, 0, MPI_COMM_WORLD)
+  MPI_Gather(local_array, curr, MPI_INT, local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
 
   end_p2 = clock();
   // end of the main computation part

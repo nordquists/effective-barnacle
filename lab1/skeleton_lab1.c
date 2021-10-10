@@ -113,6 +113,8 @@ int main(int argc, char *argv[]){
   //       (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
   //       (double)(end_p2-start_p2)/CLOCKS_PER_SEC, 
   //       (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
+
+  MPI_Finalize();
   return 0;
 }
 

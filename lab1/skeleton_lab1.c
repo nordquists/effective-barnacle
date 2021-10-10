@@ -52,63 +52,67 @@ int main(int argc, char *argv[]){
   //end of part 1
   /////////////////////////////////////////
 
+  printf("process %d s part2 = %d s part3 = %d s\n", 
+        rank,
+        n, 
+        x);
 
-  /////////////////////////////////////////
-  //start of part 2
-  // The main computation part starts here
-  start_p2 = clock();
+  // /////////////////////////////////////////
+  // //start of part 2
+  // // The main computation part starts here
+  // start_p2 = clock();
 
-  int local_array[size];
-  int curr = 0;
+  // int local_array[size];
+  // int curr = 0;
 
-  for (int num = 2 + rank; num <= n; num = num + size) {
-    if (num % x == 0) {
-      local_array[curr] = x;
-      curr++;
-    }
-  }
+  // for (int num = 2 + rank; num <= n; num = num + size) {
+  //   if (num % x == 0) {
+  //     local_array[curr] = x;
+  //     curr++;
+  //   }
+  // }
 
-  MPI_Gather(local_array, curr, MPI_INT, local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
+  // MPI_Gather(local_array, curr, MPI_INT, local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
 
-  end_p2 = clock();
-  // end of the main computation part
-  //end of part 2
-  /////////////////////////////////////////
+  // end_p2 = clock();
+  // // end of the main computation part
+  // //end of part 2
+  // /////////////////////////////////////////
 
 
-  /////////////////////////////////////////
-  //start of part 3
-  // Writing the results in the file
+  // /////////////////////////////////////////
+  // //start of part 3
+  // // Writing the results in the file
 
-  //forming the filename
+  // //forming the filename
 
-  start_p3 = clock();
+  // start_p3 = clock();
 
-  if (rank == 0) {
-    strcpy(filename, argv[1]);
-    strcat(filename, ".txt");
+  // if (rank == 0) {
+  //   strcpy(filename, argv[1]);
+  //   strcat(filename, ".txt");
 
-    if( !(fp = fopen(filename,"w+t")))
-    {
-      printf("Cannot create file %s\n", filename);
-      exit(1);
-    }
+  //   if( !(fp = fopen(filename,"w+t")))
+  //   {
+  //     printf("Cannot create file %s\n", filename);
+  //     exit(1);
+  //   }
 
-    //Write the numbers divisible by x in the file as indicated in the lab description.
-    fwrite(local_array, sizeof(int), sizeof(local_array), fp);
+  //   //Write the numbers divisible by x in the file as indicated in the lab description.
+  //   fwrite(local_array, sizeof(int), sizeof(local_array), fp);
 
-    fclose(fp);
-  }
+  //   fclose(fp);
+  // }
 
-  end_p3 = clock();
-  //end of part 3
-  /////////////////////////////////////////
+  // end_p3 = clock();
+  // //end of part 3
+  // /////////////////////////////////////////
 
-  /* Print  the times of the three parts */
-  printf("time of part1 = %lf s part2 = %lf s part3 = %lf s\n", 
-        (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
-        (double)(end_p2-start_p2)/CLOCKS_PER_SEC, 
-        (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
+  // /* Print  the times of the three parts */
+  // printf("time of part1 = %lf s part2 = %lf s part3 = %lf s\n", 
+  //       (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
+  //       (double)(end_p2-start_p2)/CLOCKS_PER_SEC, 
+  //       (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
   return 0;
 }
 

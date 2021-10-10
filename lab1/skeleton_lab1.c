@@ -74,8 +74,8 @@ int main(int argc, char *argv[]){
       curr++;
     }
   }
-  int received[(int)size];
-  int disp[(int)size];
+  int received[size];
+  int disp[size];
   // MPI_Gather(&local_array, curr, MPI_INT, &local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
   int results[n];
 
@@ -94,6 +94,11 @@ int main(int argc, char *argv[]){
   //forming the filename
 
   start_p3 = clock();
+
+  for ( i = 0 ; i < size ; i++ )
+    {
+        received[i] = 0 ;
+    }
 
   if (rank == 0) {
     MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);

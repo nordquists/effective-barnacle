@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
   //forming the filename
 
   start_p3 = clock();
-
+  printf("curr %d\n", curr);
   for ( i = 0 ; i < size ; i++ )
     {
         received[i] = 0 ;

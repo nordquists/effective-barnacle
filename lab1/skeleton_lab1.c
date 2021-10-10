@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
     }
 
     //Write the numbers divisible by x in the file as indicated in the lab description.
-    fwrite(local_array, sizeof(int), sizeof(local_array), fp);
+    fwrite(&local_array, sizeof(int), sizeof(local_array), fp);
 
     fclose(fp);
   }

@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
   printf("curr %d\n", curr);
   for ( i = 0 ; i < size ; i++ )
     {
-        received[i] = -1 ;
+        received[i] = 0 ;
     }
   MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
 

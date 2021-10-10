@@ -99,9 +99,10 @@ int main(int argc, char *argv[]){
     {
         received[i] = -1 ;
     }
+  MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
-    MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
+    
 
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");
@@ -131,9 +132,7 @@ int main(int argc, char *argv[]){
     // } 
 
     fclose(fp);
-  } else {
-    MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
-  }
+  } 
 
   end_p3 = clock();
   //end of part 3

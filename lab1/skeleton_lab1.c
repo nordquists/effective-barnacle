@@ -74,8 +74,8 @@ int main(int argc, char *argv[]){
       curr++;
     }
   }
-  int received[size];
-  int disp[size];
+  int received[(int)size];
+  int disp[(int)size];
   // MPI_Gather(&local_array, curr, MPI_INT, &local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
   int results[n];
 

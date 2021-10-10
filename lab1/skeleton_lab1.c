@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
     {
         received[i] = 0 ;
     }
-  MPI_Gatherv(local_array, curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Gatherv(*&local_array, curr, MPI_INT, *&results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
     

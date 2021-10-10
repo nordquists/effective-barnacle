@@ -39,13 +39,13 @@ int main(int argc, char *argv[]){
 
     // Process 0 must send the x and n to each process.
     // Other processes must, after receiving the variables, calculate their own range.
-    for (int q = 1; q < size; q++) {
-      MPI_Send(n, 1, MPI_INT, q, 0, MPI_COMM_WORLD);
-      MPI_Send(x, 1, MPI_INT, q, 0, MPI_COMM_WORLD);
+    for (int dest = 1; dest < size; q++) {
+      MPI_Send(&n, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
+      MPI_Send(&x, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
     }
   } else {
-    MPI_Recv(n, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    MPI_Recv(x, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(&n, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(&x, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
   }
 
   end_p1 = clock();

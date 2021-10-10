@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
       curr++;
     }
   }
-  int received;
+  int received[size];
   int disp[size];
   // MPI_Gather(&local_array, curr, MPI_INT, &local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
   int results[n];
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]){
 
     //Write the numbers divisible by x in the file as indicated in the lab description.
 
-    for(i=0;i<=received;i++){ 
+    for(i=0;i<=received[0] + receieved[1];i++){ 
       fprintf(fp, "%d \n", local_array[i]); 
     } 
 

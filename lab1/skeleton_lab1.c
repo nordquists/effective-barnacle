@@ -76,10 +76,7 @@ int main(int argc, char *argv[]){
   }
   int received[size];
   int disp[size];
-  // MPI_Gather(&local_array, curr, MPI_INT, &local_array, n, MPI_INT, 0, MPI_COMM_WORLD);
   int results[n];
-
-  // MPI_Gatherv(&local_array, curr, MPI_INT, &results, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
 
   end_p2 = clock();
   // end of the main computation part
@@ -99,7 +96,7 @@ int main(int argc, char *argv[]){
     {
         received[i] = 0 ;
     }
-  MPI_Gatherv(*&local_array, curr, MPI_INT, *&results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Gatherv(*local_array, curr, MPI_INT, *results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
     

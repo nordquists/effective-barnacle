@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
     // Process 0 must send the x and n to each process.
     // Other processes must, after receiving the variables, calculate their own range.
-    for (int q = 0; q < size; q++) {
+    for (int q = 1; q < size; q++) {
       MPI_Send(n, 1, MPI_INT, q, 0, MPI_COMM_WORLD);
       MPI_Send(x, 1, MPI_INT, q, 0, MPI_COMM_WORLD);
     }

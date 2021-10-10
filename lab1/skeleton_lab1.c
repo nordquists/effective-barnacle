@@ -101,7 +101,7 @@ int main(int argc, char *argv[]){
     //Write the numbers divisible by x in the file as indicated in the lab description.
     fwrite(&local_array, sizeof(int), sizeof(local_array), fp);
 
-    for(i=0;i<=num;i++){ 
+    for(i=0;i<=n;i++){ 
       fprintf(fp,"%d \n",i); 
     } 
 

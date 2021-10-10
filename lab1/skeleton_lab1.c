@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
   start_p3 = clock();
 
   if (rank == 0) {
-    b = malloc(n*sizeof(int))
+    int* b = malloc(n*sizeof(int));
     MPI_Gatherv(&local_array, curr, MPI_INT, &b, &received, &disp, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);

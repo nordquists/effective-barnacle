@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
   // The main computation part starts here
   start_p2 = clock();
 
-  int local_array[(int)(n / size)];
+  int local_array[n];
   int curr = 0;
 
   for (int num = 2 + rank; num <= n; num = num + size) {

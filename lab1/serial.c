@@ -8,7 +8,7 @@
 
 
 int main(int argc, char *argv[]){
-    int i;
+int i;
 int size, rank;
 unsigned int x, n;
 FILE * fp; //for creating the output file
@@ -40,7 +40,7 @@ if (rank == 0) {
 
     n = (unsigned int)atoi(argv[1]); 
     x = (unsigned int)atoi(argv[2]);
-
+    printf("READ LINE \n")
     // Process 0 must send the x and n to each process.
     // Other processes must, after receiving the variables, calculate their own range.
     for (int dest = 1; dest < size; dest++) {

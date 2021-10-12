@@ -74,9 +74,6 @@ int main(int argc, char *argv[]){
       curr++;
     }
   }
-  int received[size];
-  int disp[size];
-  int results[n];
 
   end_p2 = clock();
   // end of the main computation part
@@ -90,13 +87,17 @@ int main(int argc, char *argv[]){
 
   //forming the filename
 
+  int disp = (int *)malloc( size * sizeof(int) );
+  int received = (int *)malloc( size * sizeof(int) );
+  int results = (int *)malloc( n * sizeof(int) );
+
   start_p3 = clock();
   printf("curr %d\n", curr);
   for ( i = 0 ; i < size ; i++ )
     {
         received[i] = 0 ;
     }
-  MPI_Gatherv(&local_array[0], curr, MPI_INT, &results[0], &received[0], disp, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Gather(&local_array[0], curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
     

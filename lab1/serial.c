@@ -37,7 +37,7 @@ if (rank == 0) {
         printf("x: divisor\n");
         exit(1);
     }  
-
+    printf("ARGS MATCH \n")
     n = (unsigned int)atoi(argv[1]); 
     x = (unsigned int)atoi(argv[2]);
     printf("READ LINE \n")

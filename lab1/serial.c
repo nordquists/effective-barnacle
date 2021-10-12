@@ -98,7 +98,7 @@ int local_array[split + 1];
 int extra_offset = 2;
 int extra = 0;
 
-if (rank <= remainder) {
+if (rank < remainder) {
     extra = 1;
     extra_offset = extra_offset + rank;
 } else {
@@ -157,19 +157,6 @@ if (rank == 0) {
       printf("Cannot create file %s\n", filename);
       exit(1);
     }
-
-    //Write the numbers divisible by x in the file as indicated in the lab description.
-    // for (int process = 0; process < size; process++) {
-    //   printf("aaa %d\n", received[process]);
-    //   for (i = 0; i < received[process]; i++) { 
-    //     printf("ddd %d\n", disp[process] + i);
-    //     fprintf(fp, "%d \n", results[disp[process] + i]); 
-    //     printf("result %d\n", results[disp[process] + i]);
-        
-    //   }
-    // }
-
-
 
     for(i=0;i<=n - 2;i++){ 
       if (results[i] != -1) {

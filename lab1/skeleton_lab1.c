@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
   
   // int nth_offset = ((n - 2) / size);
   // int local_array[nth_offset];
-  int curr = 0;
+  // int curr = 0;
 
 
   // for (int num = 2 + rank; num <= n; num = num + size) {
@@ -94,6 +94,9 @@ int main(int argc, char *argv[]){
 
   int remainder = (n - 2) % size;
   int split = (n - 2) / size;
+
+  int local_array[split];
+  int curr = 0;
   if(rank == 0) {
     for (int num = 2; num < 2 * split + remainder; num++){
       if (num % x == 0) {

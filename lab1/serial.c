@@ -146,7 +146,7 @@ end_p2 = clock();
 //forming the filename
 
 start_p3 = clock();
-
+results = NULL;
 if (rank == 0) {
     results = (int *)malloc( ((split + 1) * size + 1) * sizeof(int) );
     int i;

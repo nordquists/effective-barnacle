@@ -124,15 +124,11 @@ for ( i = 0 ; i < max_local_array ; i++ ) {
 
 for (int num = extra_offset + split * rank; num < extra_offset + extra + split * (rank + 1); num++) {
     if (num % x == 0) {
-        printf("process %d: FOUND = %d\n", 
-            rank,
-            num);
+        // printf("process %d: FOUND = %d\n", 
+        //     rank,
+        //     num);
         local_array[curr] = num;
         curr++;
-    } else {
-        printf("process %d: i = %d\n", 
-            rank,
-            num);
     }
 }
 

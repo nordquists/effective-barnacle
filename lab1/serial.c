@@ -14,7 +14,7 @@ unsigned int x, n;
 FILE * fp; //for creating the output file
 char filename[100]=""; // the file name
 char * numbers;
-// int* results;
+int* results;
 
 
 clock_t start_p1, start_p2, start_p3, end_p1, end_p2, end_p3;
@@ -98,9 +98,9 @@ int split = (n - 2) / size;
 int max_local_array = split / 2 + 1;
 
 int* local_array = malloc(max_local_array * sizeof(int));
-printf("split!!!! %d \n", split);
 // int local_array[max_local_array];
-int results[max_local_array * size];
+// int results[max_local_array * size];
+// printf("split!!!! %d \n", split);
 int extra_offset = 2;
 int extra = 0;
 
@@ -159,7 +159,7 @@ end_p2 = clock();
 
 start_p3 = clock();
 if (rank == 0) {
-    // results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
+    results = (int *)malloc( ( max_local_array* size) * sizeof(int) );
     for ( i = 0 ; i < (max_local_array * size) ; i++ ) {
         results[i] = -1 ;
     }
@@ -180,7 +180,7 @@ if (rank == 0) {
         fprintf(fp, "%d \n", results[i]); 
       }
     } 
-    // free(results);
+    free(results);
     fclose(fp);
   } else {
     MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);

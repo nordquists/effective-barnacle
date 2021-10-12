@@ -141,13 +141,13 @@ end_p2 = clock();
 start_p3 = clock();
 
 if (rank == 0) {
-    results = (int *)malloc( n * sizeof(int) );
+    results = (int *)malloc( (split + 1) * size * sizeof(int) );
     int i;
     for ( i = 0 ; i < n ; i++ ) {
         results[i] = -1 ;
     }
   
-    MPI_Gather(local_array, curr, MPI_INT, results, n - 2, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, curr, MPI_INT, results, (split + 1) * size, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");
@@ -158,7 +158,7 @@ if (rank == 0) {
       exit(1);
     }
 
-    for(i=0;i<=n - 2;i++){ 
+    for(i=0;i<=(split + 1) * size;i++){ 
       if (results[i] != -1) {
         fprintf(fp, "%d \n", results[i]); 
         printf("result %d\n", results[i]);
@@ -167,7 +167,7 @@ if (rank == 0) {
 
     fclose(fp);
   } else {
-    MPI_Gather(local_array, curr, MPI_INT, results, n - 2, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, curr, MPI_INT, results, (split + 1) * size, MPI_INT, 0, MPI_COMM_WORLD);
   }
 
 end_p3 = clock();

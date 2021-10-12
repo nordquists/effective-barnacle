@@ -90,7 +90,7 @@ start_p2 = clock();
 //         curr++;
 //     }
 // }
-
+printf("START PT 2 \n");
 n = n + 1;
 int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
@@ -100,6 +100,8 @@ int local_array[max_local_array];
 int results[max_local_array * size];
 int extra_offset = 2;
 int extra = 0;
+
+printf("VALUES INITALIZED \n");
 
 if (rank < remainder) {
     extra = 1;

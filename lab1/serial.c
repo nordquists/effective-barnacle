@@ -13,6 +13,7 @@ unsigned int x, n;
 FILE * fp; //for creating the output file
 char filename[100]=""; // the file name
 char * numbers;
+int* results;
 
 clock_t start_p1, start_p2, start_p3, end_p1, end_p2, end_p3;
 
@@ -139,18 +140,48 @@ end_p2 = clock();
 
 start_p3 = clock();
 
-strcpy(filename, argv[1]);
-strcat(filename, ".txt");
+if (rank == 0) {
+    results = (int *)malloc( n * sizeof(int) );
 
-if( !(fp = fopen(filename,"w+t")))
-{
-  printf("Cannot create file %s\n", filename);
-  exit(1);
-}
+    for ( i = 0 ; i < n ; i++ ) {
+        results[i] = -1 ;
+    }
+  
+    MPI_Gather(local_array, curr, MPI_INT, results, n - 2, MPI_INT, 0, MPI_COMM_WORLD);
 
-//Write the numbers divisible by x in the file as indicated in the lab description.
+    strcpy(filename, argv[1]);
+    strcat(filename, ".txt");
 
-fclose(fp);
+    if( !(fp = fopen(filename,"w+t")))
+    {
+      printf("Cannot create file %s\n", filename);
+      exit(1);
+    }
+
+    //Write the numbers divisible by x in the file as indicated in the lab description.
+    // for (int process = 0; process < size; process++) {
+    //   printf("aaa %d\n", received[process]);
+    //   for (i = 0; i < received[process]; i++) { 
+    //     printf("ddd %d\n", disp[process] + i);
+    //     fprintf(fp, "%d \n", results[disp[process] + i]); 
+    //     printf("result %d\n", results[disp[process] + i]);
+        
+    //   }
+    // }
+
+
+
+    for(i=0;i<=n - 2;i++){ 
+      if (results[i] != -1) {
+        fprintf(fp, "%d \n", results[i]); 
+        printf("result %d\n", results[i]);
+      }
+    } 
+
+    fclose(fp);
+  } else {
+    MPI_Gather(local_array, curr, MPI_INT, results, n - 2, MPI_INT, 0, MPI_COMM_WORLD);
+  }
 
 end_p3 = clock();
 //end of part 3

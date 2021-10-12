@@ -87,7 +87,7 @@ start_p2 = clock();
 // }
 
 
-
+int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;
 
@@ -98,7 +98,7 @@ if (rank < remainder) {
     extra = 1;
     extra_offset = rank;
 } else {
-    extra_offset = remainder
+    extra_offset = remainder;
 }
 
 printf("process %d: range=[%d, %d)\n", 

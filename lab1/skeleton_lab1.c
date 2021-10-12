@@ -94,38 +94,31 @@ int main(int argc, char *argv[]){
 
   int remainder = (n - 2) % size;
   int split = (n - 2) / size;
+  int extra_so_far = rank
 
-  int local_array[split];
+  int local_array[split + 1];
   int curr = 0;
-  if(rank == 0) {
-    for (int num = 2; num < 2 + split + remainder; num++){
-      if (num % x == 0) {
-        printf("process %d: FOUND = %d\n", 
-          rank,
-          num);
-        local_array[curr] = num;
-        curr++;
-      } else {
-        printf("process %d: i = %d\n", 
-          rank,
-          num);
-      }
-    }
-  } else {
-    for (int num = 2 + remainder + split * rank + 1; num < 2 + remainder + split * (rank + 1) + 1; num++){
-      if (num % x == 0) {
-        printf("process %d: FOUND = %d\n", 
-          rank,
-          num);
-        local_array[curr] = num;
-        curr++;
-      } else {
-        printf("process %d: i = %d\n", 
-          rank,
-          num);
-      }
+
+  printf("process %d: range=[%d, %d)\n", 
+        rank,
+        2 + split * rank,
+        2 + split * (rank + 1));
+
+  for (int num = 2 + ; num < 2 + split + remainder; num++){
+    if (num % x == 0) {
+      printf("process %d: FOUND = %d\n", 
+        rank,
+        num);
+      local_array[curr] = num;
+      curr++;
+    
+    } else {
+      printf("process %d: i = %d\n", 
+        rank,
+        num);
     }
   }
+
 
   end_p2 = clock();
   // end of the main computation part

@@ -100,54 +100,54 @@ int main(int argc, char *argv[]){
 
   //forming the filename
 
-  // int* disp = (int *)malloc( size * sizeof(int) );
-  // int* received = (int *)malloc( size * sizeof(int) );
-  // int* results = (int *)malloc( n * sizeof(int) );
+  int* disp = (int *)malloc( size * sizeof(int) );
+  int* received = (int *)malloc( size * sizeof(int) );
+  int* results = (int *)malloc( n * sizeof(int) );
 
   start_p3 = clock();
-  // printf("curr %d\n", curr);
-  // for ( i = 0 ; i < n ; i++ )
-  //   {
-  //       results[i] = -1 ;
-  //   }
+  printf("curr %d\n", curr);
+  for ( i = 0 ; i < n ; i++ )
+    {
+        results[i] = -1 ;
+    }
   
-  // // MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
+  // MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 
-  // if (rank == 0) {
-  //   strcpy(filename, argv[1]);
-  //   strcat(filename, ".txt");
+  if (rank == 0) {
+    strcpy(filename, argv[1]);
+    strcat(filename, ".txt");
 
-  //   if( !(fp = fopen(filename,"w+t")))
-  //   {
-  //     printf("Cannot create file %s\n", filename);
-  //     exit(1);
-  //   }
+    if( !(fp = fopen(filename,"w+t")))
+    {
+      printf("Cannot create file %s\n", filename);
+      exit(1);
+    }
 
-  //   //Write the numbers divisible by x in the file as indicated in the lab description.
-  //   // for (int process = 0; process < size; process++) {
-  //   //   printf("aaa %d\n", received[process]);
-  //   //   for (i = 0; i < received[process]; i++) { 
-  //   //     printf("ddd %d\n", disp[process] + i);
-  //   //     fprintf(fp, "%d \n", results[disp[process] + i]); 
-  //   //     printf("result %d\n", results[disp[process] + i]);
+    //Write the numbers divisible by x in the file as indicated in the lab description.
+    // for (int process = 0; process < size; process++) {
+    //   printf("aaa %d\n", received[process]);
+    //   for (i = 0; i < received[process]; i++) { 
+    //     printf("ddd %d\n", disp[process] + i);
+    //     fprintf(fp, "%d \n", results[disp[process] + i]); 
+    //     printf("result %d\n", results[disp[process] + i]);
         
-  //   //   }
-  //   // }
+    //   }
+    // }
 
 
 
-  //   for(i=0;i<=n;i++){ 
-  //     if (results[i] != -1) {
-  //       fprintf(fp, "%d \n", results[i]); 
-  //       printf("result %d\n", results[i]);
-  //     }
-  //   } 
+    for(i=0;i<=n;i++){ 
+      if (results[i] != -1) {
+        fprintf(fp, "%d \n", results[i]); 
+        printf("result %d\n", results[i]);
+      }
+    } 
 
-  //   fclose(fp);
-  // } 
-  // free(disp);
-  // free(received);
-  // free(results);
+    fclose(fp);
+  } 
+  free(disp);
+  free(received);
+  free(results);
 
   end_p3 = clock();
   //end of part 3

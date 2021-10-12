@@ -79,6 +79,9 @@ int main(int argc, char *argv[]){
   // }
 
   for (int num = 2 + nth_offset * rank; num <= nth_offset * (rank + 1); num++) {
+      printf("process %d: n = %d\n", 
+        rank,
+        num);
     if (num % x == 0) {
         local_array[curr] = x;
         curr++;

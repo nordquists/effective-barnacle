@@ -8,6 +8,7 @@
 
 
 int main(int argc, char *argv[]){
+    int i;
 int size, rank;
 unsigned int x, n;
 FILE * fp; //for creating the output file
@@ -153,8 +154,6 @@ end_p2 = clock();
 start_p3 = clock();
 if (rank == 0) {
     // results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
-    
-    int i;
     for ( i = 0 ; i < ((split + 1) * size) ; i++ ) {
         results[i] = -1 ;
     }

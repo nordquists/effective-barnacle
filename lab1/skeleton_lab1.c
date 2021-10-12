@@ -87,9 +87,9 @@ int main(int argc, char *argv[]){
 
   //forming the filename
 
-  int disp = (int *)malloc( size * sizeof(int) );
-  int received = (int *)malloc( size * sizeof(int) );
-  int results = (int *)malloc( n * sizeof(int) );
+  int* disp = (int *)malloc( size * sizeof(int) );
+  int* received = (int *)malloc( size * sizeof(int) );
+  int* results = (int *)malloc( n * sizeof(int) );
 
   start_p3 = clock();
   printf("curr %d\n", curr);

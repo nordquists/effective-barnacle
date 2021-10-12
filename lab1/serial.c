@@ -166,7 +166,7 @@ if (rank == 0) {
     //   exit(1);
     // }
 
-    for(i=0;i < (split + 1) * n;i++){ 
+    for(i=0;i < (split + 1) * size;i++){ 
         printf("DDDDD %d\n", results[i]);
       if (results[i] != -1) {
         // fprintf(fp, "%d \n", results[i]); 

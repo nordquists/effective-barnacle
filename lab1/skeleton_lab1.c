@@ -86,6 +86,9 @@ int main(int argc, char *argv[]){
         local_array[curr] = num;
         curr++;
     }
+    printf("process %d: i = %d\n", 
+        rank,
+        num);
 }
 
   end_p2 = clock();

@@ -13,7 +13,7 @@ unsigned int x, n;
 FILE * fp; //for creating the output file
 char filename[100]=""; // the file name
 char * numbers;
-int* results;
+// int* results;
 
 
 clock_t start_p1, start_p2, start_p3, end_p1, end_p2, end_p3;
@@ -95,6 +95,7 @@ int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;
 int local_array[split + 1];
+int results[(split + 1) * n]
 int extra_offset = 2;
 int extra = 0;
 
@@ -147,7 +148,7 @@ end_p2 = clock();
 
 start_p3 = clock();
 if (rank == 0) {
-    results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
+    // results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
     
     int i;
     for ( i = 0 ; i < ((split + 1) * size) ; i++ ) {
@@ -172,7 +173,7 @@ if (rank == 0) {
         printf("result %d\n", results[i]);
       }
     } 
-    free(results);
+    // free(results);
     // fclose(fp);
   } else {
     MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);

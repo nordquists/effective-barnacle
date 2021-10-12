@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
         rank,
         num);
     if (num % x == 0) {
-        local_array[curr] = x;
+        local_array[curr] = num;
         curr++;
     }
 }

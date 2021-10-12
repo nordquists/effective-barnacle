@@ -58,8 +58,8 @@ int main(int argc, char *argv[]){
   start_p2 = clock();
 
   
-  int nth_offset = ((n - 2) / size);
-  int local_array[nth_offset];
+  // int nth_offset = ((n - 2) / size);
+  // int local_array[nth_offset];
   int curr = 0;
 
 
@@ -73,25 +73,56 @@ int main(int argc, char *argv[]){
   //   }
   // }
 
-  printf("process %d: range=[%d, %d]\n", 
-        rank,
-        2 + nth_offset * rank,
-        2 + nth_offset * (rank + 1));
+  // printf("process %d: range=[%d, %d]\n", 
+  //       rank,
+  //       2 + nth_offset * rank,
+  //       2 + nth_offset * (rank + 1));
 
-  for (int num = 2 + nth_offset * rank; num < 2 + nth_offset * (rank + 1); num++) {
-    if (num % x == 0) {
-      printf("process %d: FOUND = %d\n", 
-        rank,
-        num);
+  // for (int num = 2 + nth_offset * rank; num < 2 + nth_offset * (rank + 1); num++) {
+  //   if (num % x == 0) {
+  //     printf("process %d: FOUND = %d\n", 
+  //       rank,
+  //       num);
+  //       local_array[curr] = num;
+  //       curr++;
+  //   } else {
+  //     printf("process %d: i = %d\n", 
+  //       rank,
+  //       num);
+  //   }
+  //   }
+
+  int remainder = (n - 2) % size;
+  int split = (n - 2) / size;
+  if(rank == 0) {
+    for (int num = 2; num < 2 * split + remainder; num++){
+      if (num % x == 0) {
+        printf("process %d: FOUND = %d\n", 
+          rank,
+          num);
         local_array[curr] = num;
         curr++;
-    } else {
-      printf("process %d: i = %d\n", 
-        rank,
-        num);
+      } else {
+        printf("process %d: i = %d\n", 
+          rank,
+          num);
+      }
     }
-    
-}
+  } else {
+    for (int num = 2 + remainder; num < 2 * split + remainder; num++){
+      if (num % x == 0) {
+        printf("process %d: FOUND = %d\n", 
+          rank,
+          num);
+        local_array[curr] = num;
+        curr++;
+      } else {
+        printf("process %d: i = %d\n", 
+          rank,
+          num);
+      }
+    }
+  }
 
   end_p2 = clock();
   // end of the main computation part

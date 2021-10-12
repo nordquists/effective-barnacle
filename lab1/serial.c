@@ -143,7 +143,7 @@ start_p3 = clock();
 if (rank == 0) {
     results = (int *)malloc( n * sizeof(int) );
 
-    for ( i = 0 ; i < n ; i++ ) {
+    for (int i = 0 ; i < n ; i++ ) {
         results[i] = -1 ;
     }
   

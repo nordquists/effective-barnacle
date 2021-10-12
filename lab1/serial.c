@@ -156,7 +156,7 @@ end_p2 = clock();
 //     MPI_Gather(local_array, curr, MPI_INT, results, (split + 1) * size, MPI_INT, 0, MPI_COMM_WORLD);
 
 //forming the filename
-
+results = NULL;
 start_p3 = clock();
 if (rank == 0) {
     results = (int *)malloc( ( max_local_array* size) * sizeof(int) );

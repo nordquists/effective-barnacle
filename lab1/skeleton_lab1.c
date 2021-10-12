@@ -131,9 +131,9 @@ int main(int argc, char *argv[]){
 
     fclose(fp);
   } 
-  free(disp)
-  free(received)
-  free(results)
+  free(disp);
+  free(received);
+  free(results);
 
   end_p3 = clock();
   //end of part 3

@@ -151,9 +151,9 @@ if (rank == 0) {
     // results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
     
     int i;
-    for ( i = 0 ; i < ((split + 1) * size) ; i++ ) {
-        results[i] = -1 ;
-    }
+    // for ( i = 0 ; i < ((split + 1) * size) ; i++ ) {
+    //     results[i] = -1 ;
+    // }
   
     MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);
 

@@ -111,7 +111,7 @@ printf("process %d: range=[%d, %d)\n",
         extra_offset + split * rank,
         extra_offset + extra + split * (rank + 1));
 
-for ( i = 0 ; i < ((split + 1) ; i++ ) {
+for ( i = 0 ; i < (split + 1) ; i++ ) {
         local_array[i] = -1 ;
     }
 

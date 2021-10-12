@@ -95,8 +95,9 @@ n = n + 1;
 int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;
-int local_array[split + 1];
-int results[(split + 1) * size];
+int max_local_array = split / 2 + 1;
+int local_array[max_local_array];
+int results[max_local_array * size];
 int extra_offset = 2;
 int extra = 0;
 
@@ -112,7 +113,7 @@ printf("process %d: range=[%d, %d)\n",
         extra_offset + split * rank,
         extra_offset + extra + split * (rank + 1));
 
-for ( i = 0 ; i < (split + 1) ; i++ ) {
+for ( i = 0 ; i < max_local_array ; i++ ) {
         local_array[i] = -1 ;
     }
 
@@ -154,11 +155,11 @@ end_p2 = clock();
 start_p3 = clock();
 if (rank == 0) {
     // results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
-    for ( i = 0 ; i < ((split + 1) * size) ; i++ ) {
+    for ( i = 0 ; i < ((max_local_array * size) ; i++ ) {
         results[i] = -1 ;
     }
   
-    MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
 
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");
@@ -169,7 +170,7 @@ if (rank == 0) {
       exit(1);
     }
 
-    for(i=0;i < (split + 1) * size;i++){ 
+    for(i=0;i < max_local_array * size;i++){ 
       if (results[i] != -1) {
         fprintf(fp, "%d \n", results[i]); 
       }
@@ -177,7 +178,7 @@ if (rank == 0) {
     // free(results);
     fclose(fp);
   } else {
-    MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
   }
 
 end_p3 = clock();

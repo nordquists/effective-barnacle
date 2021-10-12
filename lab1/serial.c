@@ -160,24 +160,22 @@ if (rank == 0) {
   
     MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);
 
-    // strcpy(filename, argv[1]);
-    // strcat(filename, ".txt");
+    strcpy(filename, argv[1]);
+    strcat(filename, ".txt");
 
-    // if( !(fp = fopen(filename,"w+t")))
-    // {
-    //   printf("Cannot create file %s\n", filename);
-    //   exit(1);
-    // }
+    if( !(fp = fopen(filename,"w+t")))
+    {
+      printf("Cannot create file %s\n", filename);
+      exit(1);
+    }
 
     for(i=0;i < (split + 1) * size;i++){ 
-        printf("DDDDD %d\n", results[i]);
       if (results[i] != -1) {
-        // fprintf(fp, "%d \n", results[i]); 
-        printf("result %d\n", results[i]);
+        fprintf(fp, "%d \n", results[i]); 
       }
     } 
     // free(results);
-    // fclose(fp);
+    fclose(fp);
   } else {
     MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1), MPI_INT, 0, MPI_COMM_WORLD);
   }

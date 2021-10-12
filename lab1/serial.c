@@ -107,9 +107,9 @@ if (rank < remainder) {
 printf("process %d: range=[%d, %d)\n", 
         rank,
         extra_offset + split * rank,
-        extra_offset + extra + split * rank);
+        extra_offset + extra + split * (rank + 1));
 
-for (int num = extra_offset + split * rank; num < extra_offset + extra + split * rank; num++) {
+for (int num = extra_offset + split * rank; num < extra_offset + extra + split * (rank + 1); num++) {
     if (num % x == 0) {
         printf("process %d: FOUND = %d\n", 
             rank,

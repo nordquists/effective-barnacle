@@ -155,7 +155,7 @@ if (rank == 0) {
         results[i] = -1 ;
     }
   
-    MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1) * size, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, curr, MPI_INT, results, (split + 1) * size, MPI_INT, 0, MPI_COMM_WORLD);
 
     // strcpy(filename, argv[1]);
     // strcat(filename, ".txt");
@@ -176,7 +176,7 @@ if (rank == 0) {
     free(results);
     // fclose(fp);
   } else {
-    MPI_Gather(local_array, split + 1, MPI_INT, results, (split + 1) * size , MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(local_array, curr, MPI_INT, results, (split + 1) * size , MPI_INT, 0, MPI_COMM_WORLD);
   }
 
 end_p3 = clock();

@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
   start_p2 = clock();
 
   
-  int nth_offset = floor((n - 2) / size);
+  int nth_offset = ((n - 2) / size);
   int local_array[nth_offset];
   int curr = 0;
 

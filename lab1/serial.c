@@ -140,36 +140,36 @@ end_p2 = clock();
 
 start_p3 = clock();
 
-if (rank == 0) {
-    results = (int *)malloc( n * sizeof(int) );
-    int i;
-    for ( i = 0 ; i < n ; i++ ) {
-        results[i] = -1 ;
-    }
+// if (rank == 0) {
+//     results = (int *)malloc( n * sizeof(int) );
+//     int i;
+//     for ( i = 0 ; i < n ; i++ ) {
+//         results[i] = -1 ;
+//     }
   
-    MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
+//     MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 
-    // strcpy(filename, argv[1]);
-    // strcat(filename, ".txt");
+//     strcpy(filename, argv[1]);
+//     strcat(filename, ".txt");
 
-    // if( !(fp = fopen(filename,"w+t")))
-    // {
-    //   printf("Cannot create file %s\n", filename);
-    //   exit(1);
-    // }
+//     if( !(fp = fopen(filename,"w+t")))
+//     {
+//       printf("Cannot create file %s\n", filename);
+//       exit(1);
+//     }
 
-    // for(i=0;i < n - 1;i++){ 
-    //     printf("DDDDD %d\n", results[i]);
-    //   if (results[i] != -1) {
-    //     // fprintf(fp, "%d \n", results[i]); 
-    //     printf("result %d\n", results[i]);
-    //   }
-    // } 
+//     for(i=0;i < n - 1;i++){ 
+//         printf("DDDDD %d\n", results[i]);
+//       if (results[i] != -1) {
+//         // fprintf(fp, "%d \n", results[i]); 
+//         printf("result %d\n", results[i]);
+//       }
+//     } 
 
-    // fclose(fp);
-  } else {
-    MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
-  }
+//     fclose(fp);
+//   } else {
+//     MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
+//   }
 
 end_p3 = clock();
 //end of part 3

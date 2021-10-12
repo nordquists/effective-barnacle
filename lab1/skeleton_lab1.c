@@ -98,7 +98,7 @@ int main(int argc, char *argv[]){
   int local_array[split];
   int curr = 0;
   if(rank == 0) {
-    for (int num = 2; num < 2 * split + remainder; num++){
+    for (int num = 2; num < 2 + split + remainder; num++){
       if (num % x == 0) {
         printf("process %d: FOUND = %d\n", 
           rank,

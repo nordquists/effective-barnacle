@@ -148,7 +148,7 @@ end_p2 = clock();
 
 start_p3 = clock();
 if (rank == 0) {
-    results = (int *)malloc( ((split + 1) * size + 1) * sizeof(int) );
+    results = (int *)malloc( ((split + 1) * size) * sizeof(int) );
     
     int i;
     for ( i = 0 ; i < ((split + 1) * size + 1) ; i++ ) {

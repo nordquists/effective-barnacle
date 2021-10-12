@@ -112,7 +112,7 @@ int main(int argc, char *argv[]){
       }
     }
   } else {
-    for (int num = 2 + remainder + split * rank; num < 2 + remainder + split * (rank + 1) + 1; num++){
+    for (int num = 2 + remainder + split * rank + 1; num < 2 + remainder + split * (rank + 1) + 1; num++){
       if (num % x == 0) {
         printf("process %d: FOUND = %d\n", 
           rank,

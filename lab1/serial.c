@@ -97,7 +97,7 @@ int remainder = (n - 2) % size; // tells us how many processes must do 1 additio
 int split = (n - 2) / size;
 int max_local_array = split / 2 + 1;
 
-int* local_array = malloc(max_local_array * sizeof(int))
+int* local_array = malloc(max_local_array * sizeof(int));
 printf("split!!!! %d \n", split);
 // int local_array[max_local_array];
 int results[max_local_array * size];
@@ -185,7 +185,7 @@ if (rank == 0) {
   } else {
     MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
   }
-free(local_array)
+free(local_array);
 end_p3 = clock();
 //end of part 3
 /////////////////////////////////////////

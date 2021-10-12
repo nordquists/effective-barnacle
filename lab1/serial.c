@@ -97,7 +97,7 @@ int local_array[split + 1];
 int extra_offset = 2;
 int extra = 0;
 
-if (rank < remainder) {
+if (rank <= remainder) {
     extra = 1;
     extra_offset = extra_offset + rank;
 } else {

@@ -111,6 +111,10 @@ printf("process %d: range=[%d, %d)\n",
         extra_offset + split * rank,
         extra_offset + extra + split * (rank + 1));
 
+for ( i = 0 ; i < ((split + 1) ; i++ ) {
+        local_array[i] = -1 ;
+    }
+
 for (int num = extra_offset + split * rank; num < extra_offset + extra + split * (rank + 1); num++) {
     if (num % x == 0) {
         printf("process %d: FOUND = %d\n", 

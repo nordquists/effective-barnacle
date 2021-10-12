@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
     {
         received[i] = 0 ;
     }
-  MPI_Gather(&local_array[0], curr, MPI_INT, results, received, disp, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Gather(&local_array[0], curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
     
@@ -131,6 +131,9 @@ int main(int argc, char *argv[]){
 
     fclose(fp);
   } 
+  free(disp)
+  free(received)
+  free(results)
 
   end_p3 = clock();
   //end of part 3

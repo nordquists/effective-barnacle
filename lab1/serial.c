@@ -99,9 +99,9 @@ int extra = 0;
 
 if (rank < remainder) {
     extra = 1;
-    extra_offset = rank;
+    extra_offset = extra_offset + rank;
 } else {
-    extra_offset = remainder;
+    extra_offset = extra_offset + remainder;
 }
 
 printf("process %d: range=[%d, %d)\n", 

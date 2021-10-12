@@ -97,11 +97,9 @@ int main(int argc, char *argv[]){
     {
         results[i] = -1 ;
     }
-  MPI_Gather(&local_array[0], curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {
-    
-
     strcpy(filename, argv[1]);
     strcat(filename, ".txt");
 
@@ -127,8 +125,7 @@ int main(int argc, char *argv[]){
     for(i=0;i<=n;i++){ 
       if (results[i] != -1) {
         fprintf(fp, "%d \n", results[i]); 
-      printf("result %d\n", 
-        results[i]);
+        printf("result %d\n", results[i]);
       }
     } 
 

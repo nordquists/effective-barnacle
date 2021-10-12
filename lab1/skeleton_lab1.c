@@ -62,18 +62,28 @@ int main(int argc, char *argv[]){
   // The main computation part starts here
   start_p2 = clock();
 
-  int local_array[n];
+  
+  int nth_offset = (int)(n / size);
+  int local_array[nth_offset];
   int curr = 0;
 
-  for (int num = 2 + rank; num <= n; num = num + size) {
-    printf("process %d: n = %d\n", 
-        rank,
-        num);
+
+  // for (int num = 2 + rank; num <= n; num = num + size) {
+  //   printf("process %d: n = %d\n", 
+  //       rank,
+  //       num);
+  //   if (num % x == 0) {
+  //     local_array[curr] = num;
+  //     curr++;
+  //   }
+  // }
+
+  for (int num = 2 + nth_offset * rank; num <= nth_offset * (rank + 1); num++) {
     if (num % x == 0) {
-      local_array[curr] = num;
-      curr++;
+        local_array[curr] = x;
+        curr++;
     }
-  }
+}
 
   end_p2 = clock();
   // end of the main computation part
@@ -97,6 +107,7 @@ int main(int argc, char *argv[]){
     {
         results[i] = -1 ;
     }
+  
   MPI_Gather(local_array, curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 
   if (rank == 0) {

@@ -165,7 +165,7 @@ if (rank == 0) {
         printf("result %d\n", results[i]);
       }
     } 
-    free(results)
+    free(results);
     fclose(fp);
   } else {
     MPI_Gather(local_array, split + 1, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);

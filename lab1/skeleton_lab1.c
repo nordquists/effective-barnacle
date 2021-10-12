@@ -112,22 +112,23 @@ int main(int argc, char *argv[]){
     }
 
     //Write the numbers divisible by x in the file as indicated in the lab description.
-    for (int process = 0; process < size; process++) {
-      printf("aaa %d\n", received[process]);
-      for (i = 0; i < received[process]; i++) { 
-        printf("ddd %d\n", disp[process] + i);
-        fprintf(fp, "%d \n", results[disp[process] + i]); 
-        printf("result %d\n", results[disp[process] + i]);
+    // for (int process = 0; process < size; process++) {
+    //   printf("aaa %d\n", received[process]);
+    //   for (i = 0; i < received[process]; i++) { 
+    //     printf("ddd %d\n", disp[process] + i);
+    //     fprintf(fp, "%d \n", results[disp[process] + i]); 
+    //     printf("result %d\n", results[disp[process] + i]);
         
-      }
-    }
+    //   }
+    // }
 
 
-    // for(i=0;i<=received[0] + received[1];i++){ 
-    //   fprintf(fp, "%d \n", results[i]); 
-    //   printf("result %d\n", 
-    //     results[i]);
-    // } 
+
+    for(i=0;i<=n;i++){ 
+      fprintf(fp, "%d \n", results[i]); 
+      printf("result %d\n", 
+        results[i]);
+    } 
 
     fclose(fp);
   } 

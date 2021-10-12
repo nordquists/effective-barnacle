@@ -93,9 +93,9 @@ int main(int argc, char *argv[]){
 
   start_p3 = clock();
   printf("curr %d\n", curr);
-  for ( i = 0 ; i < size ; i++ )
+  for ( i = 0 ; i < n ; i++ )
     {
-        received[i] = 0 ;
+        results[i] = -1 ;
     }
   MPI_Gather(&local_array[0], curr, MPI_INT, results, n, MPI_INT, 0, MPI_COMM_WORLD);
 

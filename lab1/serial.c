@@ -92,12 +92,12 @@ start_p2 = clock();
 // }
 printf("START PT 2 \n");
 n = n + 1;
-printf("asdfsdfsfsdf \n");
 int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;
 int max_local_array = split / 2 + 1;
 int local_array[max_local_array];
+printf("asdfsdfsfsdf \n");
 int results[max_local_array * size];
 int extra_offset = 2;
 int extra = 0;

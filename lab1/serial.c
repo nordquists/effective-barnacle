@@ -185,12 +185,18 @@ free(local_array);
 end_p3 = clock();
 //end of part 3
 /////////////////////////////////////////
-MPI_Finalize();
+
 /* Print  the times of the three parts */
+if(rank == 0) {
 printf("time of part1 = %lf s part2 = %lf s part3 = %lf s\n", 
        (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
        (double)(end_p2-start_p2)/CLOCKS_PER_SEC, 
        (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
+
+}
+
+MPI_Finalize();
+
 return 0;
 }
 

@@ -80,15 +80,17 @@ int main(int argc, char *argv[]){
 
   for (int num = 2 + nth_offset * rank; num < 2 + nth_offset * (rank + 1); num++) {
     if (num % x == 0) {
-      printf("process %d: n = %d\n", 
+      printf("process %d: FOUND = %d\n", 
         rank,
         num);
         local_array[curr] = num;
         curr++;
-    }
-    printf("process %d: i = %d\n", 
+    } else {
+      printf("process %d: i = %d\n", 
         rank,
         num);
+    }
+    
 }
 
   end_p2 = clock();

@@ -89,7 +89,7 @@ start_p2 = clock();
 //     }
 // }
 
-n = n + 1
+n = n + 1;
 int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;

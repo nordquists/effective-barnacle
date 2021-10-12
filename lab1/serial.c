@@ -90,6 +90,7 @@ start_p2 = clock();
 int curr = 0;
 int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
 int split = (n - 2) / size;
+int local_array[split + 1];
 
 int extra_offset = 2;
 int extra = 0;

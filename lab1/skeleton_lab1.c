@@ -78,6 +78,11 @@ int main(int argc, char *argv[]){
   //   }
   // }
 
+  printf("process %d: range=[%d, %d]\n", 
+        rank,
+        2 + nth_offset * rank,
+        2 + nth_offset * (rank + 1));
+
   for (int num = 2 + nth_offset * rank; num < 2 + nth_offset * (rank + 1); num++) {
       printf("process %d: n = %d\n", 
         rank,

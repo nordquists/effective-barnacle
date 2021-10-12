@@ -37,10 +37,10 @@ if (rank == 0) {
         printf("x: divisor\n");
         exit(1);
     }  
-    printf("ARGS MATCH \n")
+    printf("ARGS MATCH \n");
     n = (unsigned int)atoi(argv[1]); 
     x = (unsigned int)atoi(argv[2]);
-    printf("READ LINE \n")
+    printf("READ LINE \n");
     // Process 0 must send the x and n to each process.
     // Other processes must, after receiving the variables, calculate their own range.
     for (int dest = 1; dest < size; dest++) {

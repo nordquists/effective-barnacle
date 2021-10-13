@@ -114,7 +114,7 @@ end_p2 = MPI_Wtime();
 double max_p2;
 double elapsed_time = end_p2 - start_p2;
 
-MPI_Reduce(&elapsed_time, &max_p2, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD)
+MPI_Reduce(&elapsed_time, &max_p2, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
 // end of the main compuation part
 //end of part 2

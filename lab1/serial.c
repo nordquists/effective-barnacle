@@ -17,7 +17,8 @@ char * numbers;
 int* results;
 
 
-clock_t start_p1, start_p2, start_p3, end_p1, end_p2, end_p3;
+clock_t start_p1, start_p3, end_p1, end_p3;
+double start_p2, end_p2;
 
 MPI_Init(&argc, &argv);
 
@@ -63,33 +64,9 @@ end_p1 = clock();
 //start of part 2
 // The main computation part starts here
 
-start_p2 = clock();
-
-// int* nums;
-// int split = (n - 2) / size
-// int* sub_nums = (int *)malloc( split * sizeof(int) );
-
-// if (rank == 0) {
-//     nums = (int *)malloc( (n - 2) * sizeof(int) );
-//     for (int i = 2; i < n; i++) {
-//         nums[i] = i
-//     }
-// }
-
-// MPI_Scatter(nums, n - 2, MPI_INT, sub_nums, split, MPI_INT, 0, MPI_COMM_WORLD);
+start_p2 = MPI_Wtime(); 
 
 
-// int curr = 0;
-// int nth_offset = (int)(n / size);
-// int local_array[nth_offset];
-// int* array = (int *)malloc( n * stride * size * sizeof(int) );
-
-// for (int num = 2 + rank; num <= n; num++) {
-//     if (num % x == 0) {
-//         local_array[curr] = x;
-//         curr++;
-//     }
-// }
 printf("START PT 2 \n");
 n = n + 1;
 int curr = 0;
@@ -132,8 +109,13 @@ for (int num = extra_offset + split * rank; num < extra_offset + extra + split *
     }
 }
 
-end_p2 = clock();
-  
+end_p2 = MPI_Wtime(); 
+
+double max_p2;
+double elapsed_time = end_p2 - start_p2;
+
+MPI_Reduce(&elapsed_time, &max_p2, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD)
+
 // end of the main compuation part
 //end of part 2
 /////////////////////////////////////////
@@ -190,7 +172,7 @@ end_p3 = clock();
 if(rank == 0) {
 printf("time of part1 = %lf s part2 = %lf s part3 = %lf s\n", 
        (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
-       (double)(end_p2-start_p2)/CLOCKS_PER_SEC, 
+       (double)(max_p2)/CLOCKS_PER_SEC, 
        (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
 
 }

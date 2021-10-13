@@ -172,7 +172,7 @@ end_p3 = clock();
 if(rank == 0) {
 printf("time of part1 = %lf s part2 = %lf s part3 = %lf s\n", 
        (double)(end_p1-start_p1)/CLOCKS_PER_SEC,
-       (double)(max_p2)/CLOCKS_PER_SEC, 
+       (double)(max_p2), 
        (double)(end_p3-start_p3)/CLOCKS_PER_SEC );
 
 }

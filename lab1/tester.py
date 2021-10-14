@@ -5,7 +5,7 @@ def generate_divisors(N, x):
 
     while curr < N:
         curr += x
-        results.append(curr)
+        results.append(str(curr))
 
     return results
 
@@ -20,7 +20,7 @@ def compare(output_file, N, x):
     return True
 
 if __name__ == '__main__':
-    if compare(sys.argv[1], sys.argv[2], sys.argv[3]):
+    if compare(sys.argv[1], int(sys.argv[2]), int(sys.argv[3])):
         print("CORRECT DIVISORS GENERATED")
     else:
         print("!!!INCORRECT DIVISORS GENERATED!!!")

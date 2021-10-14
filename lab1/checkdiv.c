@@ -71,16 +71,20 @@ start_p2 = MPI_Wtime();
 
 
 printf("START PT 2 \n");
+
+// Below we define all the variables that we need for step 2.
+//     There are quite a few variables that we use to determine
+//     how we process numbers that are not included 
 n = n + 1;
-int curr = 0;
-int remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
-int split = (n - 2) / size;
-int max_local_array = split / 2 + 1;
+curr = 0;
+remainder = (n - 2) % size; // tells us how many processes must do 1 additional number
+split = (n - 2) / size;
+max_local_array = split / 2 + 1;
 
-int* local_array = malloc(max_local_array * sizeof(int));
+local_array = malloc(max_local_array * sizeof(int));
 
-int extra_offset = 2;
-int extra = 0;
+extra_offset = 2;
+extra = 0;
 
 printf("VALUES INITALIZED \n");
 

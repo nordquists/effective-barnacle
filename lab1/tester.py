@@ -21,6 +21,7 @@ def compare(output_file, N, x):
         if curr != len(results) - 1:
             print(curr, len(results) - 1)
             return False
+    print(curr, len(results) - 1)
     return True
 
 if __name__ == '__main__':

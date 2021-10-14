@@ -14,6 +14,7 @@ def compare(output_file, N, x):
     curr = 0
     with open(output_file, 'r') as f:
         for line in f:
+            print(line.strip(), results[curr].strip())
             if line.strip() != results[curr].strip():
                 return False
             curr += 1

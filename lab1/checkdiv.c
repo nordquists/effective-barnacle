@@ -33,28 +33,6 @@ int main(int argc, char *argv[]) {
 
     start_p1 = clock();
 
-    // if (rank == 0) {
-    //     // Check that the input from the user is correct.
-    //     if(argc != 3){
-    //         printf("usage:  ./checkdiv N x\n");
-    //         printf("N: the upper bound of the range [2,N]\n");
-    //         printf("x: divisor\n");
-    //         exit(1);
-    //     }  
-    //     n = (unsigned int)atoi(argv[1]); 
-    //     x = (unsigned int)atoi(argv[2]);
-
-    //     // Process 0 must send the x and n to each process.
-    //     // Other processes must, after receiving the variables, calculate their own range.
-    //     for (int dest = 1; dest < size; dest++) {
-    //         MPI_Send(&n, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
-    //         MPI_Send(&x, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
-    //     }
-    // } else {
-    //     MPI_Recv(&n, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    //     MPI_Recv(&x, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    // }
-
     if(argc != 3){
         printf("usage:  ./checkdiv N x\n");
         printf("N: the upper bound of the range [2,N]\n");

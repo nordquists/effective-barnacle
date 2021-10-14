@@ -17,6 +17,8 @@ def compare(output_file, N, x):
             if line.strip() != results[curr].strip():
                 return False
             curr += 1
+        if curr != len(results) - 1:
+            return False
     return True
 
 if __name__ == '__main__':

@@ -13,12 +13,15 @@ int size, rank;
 unsigned int x, n;
 FILE * fp; //for creating the output file
 char filename[100]=""; // the file name
-char * numbers;
-int* results;
 
+int* local_array;
+int* results;
 
 clock_t start_p1, start_p3, end_p1, end_p3;
 double start_p2, end_p2;
+
+int curr, remainder, split, max_local_array, extra_offset, extra;
+
 
 MPI_Init(&argc, &argv);
 
@@ -75,9 +78,7 @@ int split = (n - 2) / size;
 int max_local_array = split / 2 + 1;
 
 int* local_array = malloc(max_local_array * sizeof(int));
-// int local_array[max_local_array];
-// int results[max_local_array * size];
-// printf("split!!!! %d \n", split);
+
 int extra_offset = 2;
 int extra = 0;
 

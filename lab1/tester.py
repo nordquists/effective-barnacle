@@ -20,7 +20,7 @@ def compare(output_file, N, x):
     return True
 
 if __name__ == '__main__':
-    if compare(sys.args[1], sys.args[2], sys.args[3]):
+    if compare(sys.argv[1], sys.argv[2], sys.argv[3]):
         print("CORRECT DIVISORS GENERATED")
     else:
         print("!!!INCORRECT DIVISORS GENERATED!!!")

@@ -105,6 +105,18 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    results = NULL;
+    if (rank == 0) {
+        results = (int *)malloc( ( max_local_array* size) * sizeof(int) );
+        for ( i = 0 ; i < (max_local_array * size) ; i++ ) {
+            results[i] = -1 ;
+        }
+    
+        MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
+    } else {
+        MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
+    }
+
     end_p2 = MPI_Wtime(); 
 
     double max_p2;
@@ -123,15 +135,15 @@ int main(int argc, char *argv[]) {
     // Writing the results in the file
 
     // forming the filename
-    results = NULL;
+    // results = NULL;
     start_p3 = clock();
     if (rank == 0) {
-        results = (int *)malloc( ( max_local_array* size) * sizeof(int) );
-        for ( i = 0 ; i < (max_local_array * size) ; i++ ) {
-            results[i] = -1 ;
-        }
+        // results = (int *)malloc( ( max_local_array* size) * sizeof(int) );
+        // for ( i = 0 ; i < (max_local_array * size) ; i++ ) {
+        //     results[i] = -1 ;
+        // }
     
-        MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
+        // MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
 
         strcpy(filename, argv[1]);
         strcat(filename, ".txt");
@@ -151,9 +163,10 @@ int main(int argc, char *argv[]) {
 
         free(results);
         fclose(fp);
-    } else {
-        MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
-    }
+    } 
+    // else {
+    //     MPI_Gather(local_array, max_local_array, MPI_INT, results, max_local_array, MPI_INT, 0, MPI_COMM_WORLD);
+    // }
     free(local_array);
     end_p3 = clock();
     

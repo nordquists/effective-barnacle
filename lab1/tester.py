@@ -15,19 +15,14 @@ def compare(output_file, N, x):
     other = []
     with open(output_file, 'r') as f:
         for line in f:
-            print(line.strip(), results[curr].strip())
             if line.strip() != results[curr].strip():
                 return False
             
             other.append(results[curr].strip())
             curr += 1
             
-        if curr != len(results) - 1:
-            print(len(results) == len(other))
-            print(other)
+        if len(results) != len(other):
             return False
-    print(results)
-    print(other)
     return True
 
 if __name__ == '__main__':

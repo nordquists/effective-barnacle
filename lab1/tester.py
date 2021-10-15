@@ -3,7 +3,7 @@ def generate_divisors(N, x):
     results = []
     curr = 0
 
-    while curr + x < N:
+    while curr + x <= N:
         curr += x
         results.append(str(curr))
 

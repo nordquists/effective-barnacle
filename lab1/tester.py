@@ -23,7 +23,7 @@ def compare(output_file, N, x):
             curr += 1
             
         if curr != len(results) - 1:
-            print(results)
+            print(len(results) == len(other))
             print(other)
             return False
     print(results)

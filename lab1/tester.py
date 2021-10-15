@@ -23,8 +23,8 @@ def compare(output_file, N, x):
             curr += 1
             
         if curr != len(results) - 1:
-            print(results, line)
-            print(curr, len(results) - 1)
+            print(results)
+            print(other)
             return False
     print(results)
     print(other)

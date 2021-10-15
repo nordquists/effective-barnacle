@@ -22,7 +22,6 @@ int main(int argc, char *argv[]) {
 
     int curr, remainder, split, max_local_array, extra_offset, extra;
 
-
     MPI_Init(&argc, &argv);
 
     MPI_Comm_size(MPI_COMM_WORLD, &size);

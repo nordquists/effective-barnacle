@@ -12,17 +12,22 @@ def generate_divisors(N, x):
 def compare(output_file, N, x):
     results = generate_divisors(N, x)
     curr = 0
+    other = []
     with open(output_file, 'r') as f:
         for line in f:
             print(line.strip(), results[curr].strip())
             if line.strip() != results[curr].strip():
                 return False
+            
+            other.append(results[curr].strip())
             curr += 1
+            
         if curr != len(results) - 1:
             print(results, line)
             print(curr, len(results) - 1)
             return False
-    print(curr, len(results) - 1)
+    print(results)
+    print(other)
     return True
 
 if __name__ == '__main__':

@@ -59,6 +59,8 @@ int main(int argc, char *argv[]) {
 
     #pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
+        int tid = omp_get_thread_num();
+        printf("THREAD ID: %d \n", tid);
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;
     }

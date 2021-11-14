@@ -46,6 +46,8 @@ int main(int argc, char *argv[]) {
     fclose(fp);
 
     int histogram[num_bins];
+    for(i = 0; i < num_bins; i++) histogram[i] = 0;
+
     scaled_bins = (float)num_bins * 1/20;
 
     //#pragma omp parallel for reduction(+:histogram)

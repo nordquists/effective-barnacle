@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < n; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
+        printf("NUMS: %lf \n", nums[i]);
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
 

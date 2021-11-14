@@ -34,7 +34,15 @@ int main(int argc, char *argv[]) {
     omp_set_num_threads(num_threads);
 
     nums = malloc(10000000 * sizeof(int));
- 
+    
+    strcpy(filename, argv[2]);
+    strcat(filename, ".txt");
+
+    if(!(fp = fopen(filename,"w+t"))) {
+        printf("Cannot create file %s\n", filename);
+        exit(1);
+    }
+
     n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
 

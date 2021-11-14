@@ -45,10 +45,10 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
 
-    int histogram[num_bins];
-    for(i = 0; i < num_bins; i++) histogram[i] = 0;
+    int histogram[num_bins] = { 0 };
+    // for(i = 0; i < num_bins; i++) histogram[i] = 0;
 
-    scaled_bins = (float)num_bins * 1 / 20;
+    scaled_bins = (float)num_bins / 20.0;
 
     //#pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < n; i++) {

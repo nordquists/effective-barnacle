@@ -2,12 +2,12 @@ import sys
 import math
 
 def generate_bins(nums, num_bins):
-    bins = [0] * num_bins
-    for num in nums:
-        print(int(num_bins / 20 * num))
-        bins[int(num_bins / 20 * num)] += 1
+    bin_counts = [0 for bin in bins]
+    for data_point in nums:
+        bin_number = data_point // (20 / num_bins)
+        bin_counts[bin_number] += 1
     
-    return bins
+    return bin_counts
 
 def compare(num_file, num_bins):
     nums = []

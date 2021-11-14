@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     char filename[100]="";
     float* nums;
 
-    if(argc != 3){
+    if(argc != 4){
         printf("usage:  ./srn334 num_bins num_threads filename\n");
         printf("num_bins: the number of bins\n");
         printf("num_threads: the number of threads\n");

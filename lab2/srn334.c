@@ -10,7 +10,7 @@ Read in file sequentially
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-//#include <omp.h>
+#include <omp.h>
 
 int main(int argc, char *argv[]) {
     FILE * fp;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     num_bins = (unsigned int)atoi(argv[1]); 
     num_threads = (unsigned int)atoi(argv[2]);
 
-    //omp_set_num_threads(num_threads);
+    omp_set_num_threads(num_threads);
     
     strcpy(filename, argv[3]);
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     printf("scaled_bins: %lf \n", scaled_bins);
     printf("num_nums: %d \n", num_nums);
 
-    //#pragma omp parallel for reduction(+:histogram)
+    #pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;

@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         printf("NUMS: %d \n", (int)(nums[i] * scaled_bins));
         printf("111: %lf \n", nums[i]);
-        histogram[(int)(nums[i] * scaled_bins)]++;
+        histogram[(int)((float)nums[i] * scaled_bins)]++;
     }
 
     for(i = 0; i < num_bins; i++) {

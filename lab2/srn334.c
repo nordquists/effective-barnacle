@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 
     nums = malloc(num_nums * sizeof(int));
 
-    n = 1;
+    n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
     
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
     printf("n: %d \n", n);
 
     //#pragma omp parallel for reduction(+:histogram)
-    for(i = 0; i < n; i++) {
+    for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;
     }

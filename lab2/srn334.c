@@ -26,7 +26,8 @@ int main(int argc, char *argv[]) {
         printf("num_threads: the number of threads\n");
         printf("filename: the filename\n");
         exit(1);
-    }  
+    } 
+
     num_bins = (unsigned int)atoi(argv[1]); 
     num_threads = (unsigned int)atoi(argv[2]);
 
@@ -40,27 +41,20 @@ int main(int argc, char *argv[]) {
     fscanf(fp, "%d", &num_nums);
 
     nums = malloc(num_nums * sizeof(int));
-
+    
     n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
     
-
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
     scaled_bins = (float)num_bins / 20.0;
 
-    printf("num_bins: %d \n", num_bins);
-    printf("scaled_bins: %lf \n", scaled_bins);
-    printf("num_nums: %d \n", num_nums);
-
-    #pragma omp parallel for num_threads(num_threads) reduction(+:histogram) schedule(static, 5)
+    #pragma omp parallel for num_threads(num_threads) reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
-
-    printf("got this far \n");
 
     for(i = 0; i < num_bins; i++) {
         printf("(%lf, %lf) --- ", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));

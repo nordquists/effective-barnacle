@@ -43,8 +43,9 @@ int main(int argc, char *argv[]) {
     }
 
     n = 0;
-    while (fscanf(fp, "%f", &nums[n++]) != EOF);
-
+    while (fscanf(fp, "%f", &nums[n++]) != EOF)
+    ;
+    fclose(fp);
 
     int histogram[num_bins];
     scaled_bins = num_bins * 1/20;

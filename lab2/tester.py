@@ -20,7 +20,7 @@ def compare(num_file, num_bins):
         # print(f"bin[{i}] = {b}")
 
 if __name__ == '__main__':
-    if compare(sys.argv[1], int(sys.argv[3])):
+    if compare(sys.argv[1], int(sys.argv[2])):
         print("CORRECT BINS GENERATED")
     else:
         print("!!!INCORRECT BINS GENERATED!!!")

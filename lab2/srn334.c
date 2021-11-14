@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    fscanf(fp, "%f", &num_nums);
+    fscanf(fp, "%d", &num_nums);
 
     nums = malloc(num_nums * sizeof(int));
 

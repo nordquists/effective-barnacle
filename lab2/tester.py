@@ -2,7 +2,7 @@ import sys
 import math
 
 def generate_bins(nums, num_bins):
-    bin_counts = [0 for bin in num_bins]
+    bin_counts = [0 for bin in range(num_bins)]
     for data_point in nums:
         bin_number = data_point // (20 / num_bins)
         bin_counts[bin_number] += 1

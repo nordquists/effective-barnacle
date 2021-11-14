@@ -31,7 +31,8 @@ int main(int argc, char *argv[]) {
     num_threads = (unsigned int)atoi(argv[2]);
 
     omp_set_num_threads(num_threads);
-    
+    printf("num_threads: %d \n", num_threads);
+
     strcpy(filename, argv[3]);
 
     if(!(fp = fopen(filename,"r"))) {

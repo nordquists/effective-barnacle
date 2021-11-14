@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     }
 
     for(i = 0; i < num_bins; i++) {
-        printf("(%lf, %lf) ---", (float)(i / num_bins * 20),  (float)((i + 1) / num_bins * 20));
+        printf("(%lf, %lf) ---", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
 

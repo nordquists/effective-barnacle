@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     
     strcpy(filename, argv[3]);
 
-    if(!(fp = fopen(filename,"w+t"))) {
+    if(!(fp = fopen(filename,"r"))) {
         printf("Cannot create file %s\n", filename);
         exit(1);
     }

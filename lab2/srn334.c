@@ -10,7 +10,7 @@ Read in file sequentially
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include <omp.h>
+//#include <omp.h>
 
 int main(int argc, char *argv[]) {
     FILE * fp;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     num_bins = (unsigned int)atoi(argv[1]); 
     num_threads = (unsigned int)atoi(argv[2]);
 
-    omp_set_num_threads(num_threads);
+    //omp_set_num_threads(num_threads);
 
     nums = malloc(10000000 * sizeof(int));
     

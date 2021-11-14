@@ -14,10 +14,12 @@ Read in file sequentially
 #include <omp.h>
 
 int main(int argc, char *argv[]) {
-    int i;
+    FILE * fp;
+    int n, i;
     float scaled_bins;
     int num_bins, num_threads;
     char filename[100]="";
+    float* nums;
 
     if(argc != 3){
         printf("usage:  ./srn334 num_bins num_threads filename\n");
@@ -31,13 +33,19 @@ int main(int argc, char *argv[]) {
 
     omp_set_num_threads(num_threads);
 
+    nums = malloc(10000000 * sizeof(int));
+ 
+    n = 0;
+    while (fscanf(fp, "%f", &nums[n++]) != EOF);
+
+
     int histogram[num_bins];
     scaled_bins = num_bins * 1/20;
 
     #pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
-        histogram[floor(x * scaled_bins)]++;
+        histogram[floor(nums[i] * scaled_bins)]++;
     }
 
     for(i = 0; i < num_bins; i++) {

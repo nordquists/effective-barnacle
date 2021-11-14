@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     FILE * fp;
     int n, i;
     float scaled_bins;
-    int num_bins, num_threads;
+    int num_bins, num_threads, num_nums;
     char filename[100]="";
     float* nums;
 
@@ -31,8 +31,6 @@ int main(int argc, char *argv[]) {
     num_threads = (unsigned int)atoi(argv[2]);
 
     //omp_set_num_threads(num_threads);
-
-    nums = malloc(10000000 * sizeof(int));
     
     strcpy(filename, argv[3]);
 
@@ -41,9 +39,14 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    n = 0;
+    fscanf(fp, "%f", &num_nums)
+
+    nums = malloc(num_nums * sizeof(int));
+
+    n = 1;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
+    
 
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;

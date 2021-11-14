@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     scaled_bins = num_bins * 1/20;
 
     #pragma omp parallel for reduction(+:histogram)
-    for(i = 0; i < nums; i++) {
+    for(i = 0; i < n; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[floor(nums[i] * scaled_bins)]++;
     }

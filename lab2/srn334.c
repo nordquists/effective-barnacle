@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
 
-    int histogram[num_bins];
+    int histogram[num_bins + 1];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
 
     scaled_bins = (float)num_bins * 1 / 20;

@@ -4,7 +4,7 @@ import math
 def generate_bins(nums, num_bins):
     bins = [0] * num_bins
     for num in nums:
-        bins[int(math.floor(num_bins / 20 * num))] += 1
+        bins[int(num_bins / 20 * num)] += 1
     
     return bins
 

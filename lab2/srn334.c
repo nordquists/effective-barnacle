@@ -30,9 +30,6 @@ int main(int argc, char *argv[]) {
     num_bins = (unsigned int)atoi(argv[1]); 
     num_threads = (unsigned int)atoi(argv[2]);
 
-    omp_set_num_threads(num_threads);
-    printf("num_threads: %d \n", num_threads);
-
     strcpy(filename, argv[3]);
 
     if(!(fp = fopen(filename,"r"))) {
@@ -57,7 +54,7 @@ int main(int argc, char *argv[]) {
     printf("scaled_bins: %lf \n", scaled_bins);
     printf("num_nums: %d \n", num_nums);
 
-    #pragma omp parallel for reduction(+:histogram)
+    #pragma omp parallel for num_threads(num_threads) reduction(+:histogram) schedule(static, 5)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;

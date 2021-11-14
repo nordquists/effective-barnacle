@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 
     printf("num_bins: %d \n", num_bins);
     printf("scaled_bins: %lf \n", scaled_bins);
-    printf("n: %d \n", n);
+    printf("num_nums: %d \n", num_nums);
 
     //#pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {

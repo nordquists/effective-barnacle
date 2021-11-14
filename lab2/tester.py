@@ -17,7 +17,7 @@ def compare(num_file, num_bins):
     
     for i, b in enumerate(results):
         print(b)
-        print(f"bin[{i}] = {b}")
+        # print(f"bin[{i}] = {b}")
 
 if __name__ == '__main__':
     if compare(sys.argv[1], int(sys.argv[3])):

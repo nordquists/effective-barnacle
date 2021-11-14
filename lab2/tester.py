@@ -6,7 +6,7 @@ def generate_bins(nums, num_bins):
     for i in range(1, len(nums)):
         bin_number = nums[i] // (20 / num_bins)
         print(int(bin_number))
-        print(num_bins)
+        print(nums[i])
         bin_counts[int(bin_number)] += 1
     
     return bin_counts

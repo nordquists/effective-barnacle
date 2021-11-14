@@ -48,13 +48,15 @@ int main(int argc, char *argv[]) {
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
 
-    scaled_bins = (float)num_bins * 1/20;
+    scaled_bins = (float)num_bins * 1 / 20;
 
     //#pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < n; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
+
+    printf("got this far");
 
     for(i = 0; i < num_bins; i++) {
         printf("(%lf, %lf) --- ", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));

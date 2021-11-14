@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
     nums = malloc(10000000 * sizeof(int));
     
-    strcpy(filename, argv[2]);
+    strcpy(filename, argv[3]);
 
     if(!(fp = fopen(filename,"w+t"))) {
         printf("Cannot create file %s\n", filename);

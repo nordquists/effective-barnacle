@@ -10,7 +10,6 @@ Read in file sequentially
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include <math.h>
 #include <omp.h>
 
 int main(int argc, char *argv[]) {
@@ -53,7 +52,7 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel for reduction(+:histogram)
     for(i = 0; i < n; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
-        histogram[(int) floor(nums[i] * scaled_bins)]++;
+        histogram[(int)(nums[i] * scaled_bins)]++;
     }
 
     for(i = 0; i < num_bins; i++) {

@@ -16,7 +16,8 @@ def compare(num_file, num_bins):
     results = generate_bins(nums, num_bins)
     
     for i, b in enumerate(results):
-        print(f"bin[{i}] = {len(b)}")
+        print(b)
+        print(f"bin[{i}] = {b}")
 
 if __name__ == '__main__':
     if compare(sys.argv[1], int(sys.argv[3])):

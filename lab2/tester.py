@@ -12,12 +12,12 @@ def compare(num_file, num_bins):
     nums = []
     with open(num_file, 'r') as f:
         for line in f:
-            nums.extend([int(item) for item in line.split()])
+            nums.extend([float(item) for item in line.split()])
     results = generate_bins(nums, num_bins)
     
     for i, b in enumerate(results):
         print(b)
-        # print(f"bin[{i}] = {b}")
+        print(f"bin[{i}] = {b}")
 
 if __name__ == '__main__':
     if compare(sys.argv[1], int(sys.argv[2])):

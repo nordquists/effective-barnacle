@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
 
-    int histogram[num_bins + 1];
+    int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
 
     scaled_bins = (float)num_bins * 1 / 20;
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
 
-    printf("got this far");
+    printf("got this far \n");
 
     for(i = 0; i < num_bins; i++) {
         printf("(%lf, %lf) --- ", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));

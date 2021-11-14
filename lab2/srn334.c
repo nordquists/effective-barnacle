@@ -1,3 +1,50 @@
 
 
-// 
+/*
+
+Read in file sequentially 
+
+
+*/
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <math.h>
+#include <omp.h>
+
+int main(int argc, char *argv[]) {
+    int i;
+    float scaled_bins;
+    int num_bins, num_threads;
+    char filename[100]="";
+
+    if(argc != 3){
+        printf("usage:  ./srn334 num_bins num_threads filename\n");
+        printf("num_bins: the number of bins\n");
+        printf("num_threads: the number of threads\n");
+        printf("filename: the filename\n");
+        exit(1);
+    }  
+    num_bins = (unsigned int)atoi(argv[1]); 
+    num_threads = (unsigned int)atoi(argv[2]);
+
+    omp_set_num_threads(num_threads);
+
+    int histogram[num_bins];
+    scaled_bins = num_bins * 1/20;
+
+    #pragma omp parallel for reduction(+:histogram)
+    for(i = 0; i < nums; i++) {
+        // We want to map our numbers from [0, 20] -> [0, num_bins]
+        histogram[floor(x * scaled_bins)]++;
+    }
+
+    for(i = 0; i < num_bins; i++) {
+        printf("(%lf, %lf) ---", i / num_bins * 20,  (i + 1) / num_bins * 20);
+        printf("bin[%d] = %d\n", i, histogram[i]);
+    }
+
+    return 0;
+}
+

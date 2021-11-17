@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     float scaled_bins;
     int num_bins, threads, num_nums;
     clock_t start_io, end_io;
-    struct timeval start_parallel, end_parallel;
+    time_t start_parallel, end_parallel;
 
     char filename[100]="";
     float* nums;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     scaled_bins = (float)num_bins / 20.0;
 
     // start_parallel = clock();
-    gettimeofday(&start_parallel, NULL);
+    time(&start_parallel, NULL);
    
     // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
     // for(i = 0; i < num_nums; i++) {
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     }
 
     // end_parallel = clock();
-    gettimeofday(&end_parallel, NULL);
+    time(&end_parallel, NULL);
 
 
     for(i = 0; i < num_bins; i++) {
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
     printf("time of io %lf s, time of parallel part %lf s\n", 
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),
-        ((double)(end_parallel.tv_sec-start_parallel.tv_sec)));
+            difftime(end_parallel,start_parallel));
 
     return 0;
 }

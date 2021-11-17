@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
     start_parallel = clock();
 
-    #pragma omp parallel
+    #pragma omp parallel num_threads(threads)
     {
         #pragma omp for reduction(+:histogram)
         for(i = 0; i < num_nums; i++) {

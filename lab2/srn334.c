@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 
     printf("time of parallel part $lf \n", 
         (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
-    } 
+    
 
     return 0;
 }

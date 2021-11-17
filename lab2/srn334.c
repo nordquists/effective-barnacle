@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
             local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
         }
 
-        #pragma omp for
+        #pragma omp single
         for(i = 0; i < num_bins; i++) {
             for(t = 0; t < num_threads; t++) {
                 histogram[i] += local_histogram[t][i];

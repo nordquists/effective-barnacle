@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel for num_threads(num_threads) reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
-        if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
+        // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
 
-    printf("time of parallel part %lf \n", 
+    printf("time of parallel part %lf s\n", 
         (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
     
 

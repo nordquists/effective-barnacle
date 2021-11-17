@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     int n, i, t;
     float scaled_bins;
     int num_bins, threads, num_nums;
-    clock_t start_io, end_io, start_parallel, end_parallel;
+    time_t start_io, end_io, start_parallel, end_parallel;
     char filename[100]="";
     float* nums;
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     num_bins = (unsigned int)atoi(argv[1]); 
     threads = (unsigned int)atoi(argv[2]);
 
-    start_io = clock();
+    start_io = time(NULL);
 
     strcpy(filename, argv[3]);
 
@@ -49,13 +49,13 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
     
-    end_io = clock();
+    end_io = time(NULL);
 
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
     scaled_bins = (float)num_bins / 20.0;
 
-    start_parallel = clock();
+    start_parallel = time(NULL);
 
    
     // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    end_parallel = clock();
+    end_parallel = time(NULL);
 
 
     for(i = 0; i < num_bins; i++) {
@@ -99,9 +99,13 @@ int main(int argc, char *argv[]) {
 
     // printf("we used %d threads \n", threads);
 
+    // printf("time of io %lf s, time of parallel part %lf s\n", 
+    //     ((double)(end_io-start_io))/CLOCKS_PER_SEC,
+    //     ((double)(end_parallel-start_parallel))/CLOCKS_PER_SEC);
+
     printf("time of io %lf s, time of parallel part %lf s\n", 
-        ((double)(end_io-start_io))/CLOCKS_PER_SEC,
-        ((double)(end_parallel-start_parallel))/CLOCKS_PER_SEC);
+        ((double)(end_io-start_io)),
+        ((double)(end_parallel-start_parallel)));
 
     return 0;
 }

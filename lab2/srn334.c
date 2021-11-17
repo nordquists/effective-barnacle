@@ -85,6 +85,8 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    printf("Cannot create file fdgsgdfg",);
+
 
 
     end_parallel = clock();

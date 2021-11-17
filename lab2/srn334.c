@@ -73,13 +73,13 @@ int main(int argc, char *argv[]) {
         int tid = omp_get_thread_num(); 
 
         #pragma omp for 
-        for(int i = 0; i < page_size; i++) {
+        for(i = 0; i < page_size; i++) {
             local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
         }
 
         #pragma omp for
-        for(int i = 0; i < num_bins; i++) {
-            for(int t = 0; t < num_threads; t++) {
+        for(i = 0; i < num_bins; i++) {
+            for(t = 0; t < num_threads; t++) {
                 histogram[i] += local_histogram[t][i];
             }
         }

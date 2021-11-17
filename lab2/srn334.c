@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
 
-    printf("time of parallel part $lf \n", 
+    printf("time of parallel part %lf \n", 
         (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
     
 

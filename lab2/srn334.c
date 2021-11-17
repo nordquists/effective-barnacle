@@ -64,31 +64,26 @@ int main(int argc, char *argv[]) {
     //     // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
     //     histogram[(int)(nums[i] * scaled_bins)]++;
     // }
-    printf("HEHEHEHfg");
 
+    int num_threads = threads; 
 
-    // int num_threads = threads; 
+    #pragma omp parallel num_threads(threads)
+    {
+        int local_histogram[num_threads][num_bins];
+        int tid = omp_get_thread_num(); 
 
-    // #pragma omp parallel 
-    // {
-    //     int local_histogram[num_threads][num_bins];
-    //     int tid = omp_get_thread_num(); 
+        #pragma omp for 
+        for(i = 0; i < num_nums; i++) {
+            local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
+        }
 
-    //     printf("Cannot create file fdgsgdfg");
-
-
-    //     #pragma omp for 
-    //     for(i = 0; i < num_nums; i++) {
-    //         local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
-    //     }
-
-    //     #pragma omp single
-    //     for(i = 0; i < num_bins; i++) {
-    //         for(t = 0; t < num_threads; t++) {
-    //             histogram[i] += local_histogram[t][i];
-    //         }
-    //     }
-    // }
+        #pragma omp single
+        for(i = 0; i < num_bins; i++) {
+            for(t = 0; t < num_threads; t++) {
+                histogram[i] += local_histogram[t][i];
+            }
+        }
+    }
 
 
 

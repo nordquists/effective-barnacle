@@ -59,33 +59,33 @@ int main(int argc, char *argv[]) {
 
     start_parallel = omp_get_wtime(); 
    
-    // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
-    // for(i = 0; i < num_nums; i++) {
-    //     // We want to map our numbers from [0, 20] -> [0, num_bins]
-    //     // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-    //     histogram[(int)(nums[i] * scaled_bins)]++;
-    // }
-
-    #pragma omp parallel num_threads(threads)
-    {
-        int local_histogram[threads][num_bins];
-        #pragma omp single
-        memset(local_histogram, 0, sizeof(local_histogram[0][0]) * threads * num_bins);
-
-        int tid = omp_get_thread_num(); 
-
-        #pragma omp for 
-        for(i = 0; i < num_nums; i++) {
-            local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
-        }
-
-        #pragma omp for
-        for(i = 0; i < num_bins; i++) {
-            for(t = 0; t < threads; t++) {
-                histogram[i] += local_histogram[t][i];
-            }
-        }
+    #pragma omp parallel for num_threads(threads) reduction(+:histogram)
+    for(i = 0; i < num_nums; i++) {
+        // We want to map our numbers from [0, 20] -> [0, num_bins]
+        // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
+        histogram[(int)(nums[i] * scaled_bins)]++;
     }
+
+    // #pragma omp parallel num_threads(threads)
+    // {
+    //     int local_histogram[threads][num_bins];
+    //     #pragma omp single
+    //     memset(local_histogram, 0, sizeof(local_histogram[0][0]) * threads * num_bins);
+
+    //     int tid = omp_get_thread_num(); 
+
+    //     #pragma omp for 
+    //     for(i = 0; i < num_nums; i++) {
+    //         local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
+    //     }
+
+    //     #pragma omp for
+    //     for(i = 0; i < num_bins; i++) {
+    //         for(t = 0; t < threads; t++) {
+    //             histogram[i] += local_histogram[t][i];
+    //         }
+    //     }
+    // }
 
     end_parallel = omp_get_wtime(); 
 

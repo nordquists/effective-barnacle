@@ -72,7 +72,9 @@ int main(int argc, char *argv[]) {
 
         #pragma omp for 
         for(i = 0; i < num_bins; i++) {
-            local_histogram[tid][i] = 0;
+            for(t = 0; t < threads; t++) {
+                local_histogram[t][i] = 0;
+            }
         }
 
         #pragma omp for 

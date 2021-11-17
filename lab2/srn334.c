@@ -72,6 +72,9 @@ int main(int argc, char *argv[]) {
         int local_histogram[num_threads][num_bins];
         int tid = omp_get_thread_num(); 
 
+        printf("Cannot create file fdgsgdfg");
+
+
         #pragma omp for 
         for(i = 0; i < num_nums; i++) {
             local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
@@ -85,7 +88,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("Cannot create file fdgsgdfg");
 
 
 

@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
     num_bins = (unsigned int)atoi(argv[1]); 
     threads = (unsigned int)atoi(argv[2]);
 
+
+    // START: IO Portion 
     start_io = clock();
 
     strcpy(filename, argv[3]);
@@ -52,48 +54,28 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     
     end_io = clock();
+    // END: IO Portion 
 
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
     scaled_bins = (float)num_bins / 20.0;
 
+    // START: Parallel Portion
     start_parallel = omp_get_wtime(); 
    
-    // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
-    // for(i = 0; i < num_nums; i++) {
-    //     // We want to map our numbers from [0, 20] -> [0, num_bins]
-    //     // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-    //     histogram[(int)(nums[i] * scaled_bins)]++;
-    // }
-
-    #pragma omp parallel num_threads(threads)
-    {
-        int local_histogram[threads][num_bins];
-        memset(local_histogram, 0, sizeof(local_histogram[0][0]) * threads * num_bins);
-
-        int tid = omp_get_thread_num(); 
-
-        #pragma omp for 
-        for(i = 0; i < num_nums; i++) {
-            local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
-        }
-
-        #pragma omp single
-        for(i = 0; i < num_bins; i++) {
-            for(t = 0; t < threads; t++) {
-                histogram[i] += local_histogram[t][i];
-            }
-        }
+    #pragma omp parallel for num_threads(threads) reduction(+:histogram)
+    for(i = 0; i < num_nums; i++) {
+        // We want to map our numbers from [0, 20] -> [0, num_bins]
+        // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
+        histogram[(int)(nums[i] * scaled_bins)]++;
     }
 
     end_parallel = omp_get_wtime(); 
+    // END: Parallel Portion
 
     for(i = 0; i < num_bins; i++) {
-        // printf("(%lf, %lf) --- ", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
-
-    // printf("we used %d threads \n", threads);
 
     printf("time of io %lf s, time of parallel part %lf s\n", 
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),

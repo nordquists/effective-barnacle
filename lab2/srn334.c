@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
 
     printf("time of io %lf s, time of parallel part %lf s\n", 
         (double)(end_io-start_io)/CLOCKS_PER_SEC),
-        (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
+        (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC));
     
 
     return 0;

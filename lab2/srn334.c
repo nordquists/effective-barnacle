@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     scaled_bins = (float)num_bins / 20.0;
 
     // start_parallel = clock();
-    time(&start_parallel, NULL);
+    time(&start_parallel);
    
     // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
     // for(i = 0; i < num_nums; i++) {
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     }
 
     // end_parallel = clock();
-    time(&end_parallel, NULL);
+    time(&end_parallel);
 
 
     for(i = 0; i < num_bins; i++) {

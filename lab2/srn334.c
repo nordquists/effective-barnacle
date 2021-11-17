@@ -64,6 +64,8 @@ int main(int argc, char *argv[]) {
     //     // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
     //     histogram[(int)(nums[i] * scaled_bins)]++;
     // }
+    printf("HEHEHEHfg");
+
 
     int num_threads = threads; 
 

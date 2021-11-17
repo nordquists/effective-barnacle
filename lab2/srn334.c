@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("Cannot create file fdgsgdfg",);
+    printf("Cannot create file fdgsgdfg");
 
 
 

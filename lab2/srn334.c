@@ -67,28 +67,28 @@ int main(int argc, char *argv[]) {
     printf("HEHEHEHfg");
 
 
-    int num_threads = threads; 
+    // int num_threads = threads; 
 
-    #pragma omp parallel 
-    {
-        int local_histogram[num_threads][num_bins];
-        int tid = omp_get_thread_num(); 
+    // #pragma omp parallel 
+    // {
+    //     int local_histogram[num_threads][num_bins];
+    //     int tid = omp_get_thread_num(); 
 
-        printf("Cannot create file fdgsgdfg");
+    //     printf("Cannot create file fdgsgdfg");
 
 
-        #pragma omp for 
-        for(i = 0; i < num_nums; i++) {
-            local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
-        }
+    //     #pragma omp for 
+    //     for(i = 0; i < num_nums; i++) {
+    //         local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
+    //     }
 
-        #pragma omp single
-        for(i = 0; i < num_bins; i++) {
-            for(t = 0; t < num_threads; t++) {
-                histogram[i] += local_histogram[t][i];
-            }
-        }
-    }
+    //     #pragma omp single
+    //     for(i = 0; i < num_bins; i++) {
+    //         for(t = 0; t < num_threads; t++) {
+    //             histogram[i] += local_histogram[t][i];
+    //         }
+    //     }
+    // }
 
 
 

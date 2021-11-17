@@ -14,7 +14,7 @@ Read in file sequentially
 
 int main(int argc, char *argv[]) {
     FILE * fp;
-    int n, i, t;
+    int n, i;
     float scaled_bins;
     int num_bins, threads, num_nums;
     clock_t start_io, end_io;

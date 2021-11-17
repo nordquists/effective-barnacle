@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-        #pragma omp critical
+        #pragma omp atomic
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
 

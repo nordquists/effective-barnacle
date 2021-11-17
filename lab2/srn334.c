@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
         #pragma omp for
         for(i = 0; i < num_bins; i++) {
             for(t = 0; t < threads; t++) {
-                #pragma omp atomic
                 histogram[i] += local_histogram[t][i];
             }
         }

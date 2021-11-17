@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     int n, i;
     float scaled_bins;
     int num_bins, num_threads, num_nums;
+    clock_t start_parallel, end_parallel;
     char filename[100]="";
     float* nums;
 
@@ -50,17 +51,26 @@ int main(int argc, char *argv[]) {
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
     scaled_bins = (float)num_bins / 20.0;
 
+    start_parallel = clock();
+
     #pragma omp parallel for num_threads(num_threads) reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
-        if(nums[i] == 20.0) printf("UHOH");
+        if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
+
+    end_parallel = clock();
+
 
     for(i = 0; i < num_bins; i++) {
         printf("(%lf, %lf) --- ", ((float)i / (float)num_bins * 20.0),  (float)(((float)i + 1) / (float)num_bins * 20.0));
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
+
+    printf("time of parallel part $lf \n", 
+        (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
+    } 
 
     return 0;
 }

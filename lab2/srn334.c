@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     int n, i;
     float scaled_bins;
     int num_bins, threads, num_nums;
-    clock_t start_parallel, end_parallel;
+    clock_t start_io, end_io, start_parallel, end_parallel;
     char filename[100]="";
     float* nums;
 
@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
 
     num_bins = (unsigned int)atoi(argv[1]); 
     threads = (unsigned int)atoi(argv[2]);
+
+    start_io = clock();
 
     strcpy(filename, argv[3]);
 
@@ -47,6 +49,8 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
     
+    end_io = clock();
+
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
     scaled_bins = (float)num_bins / 20.0;
@@ -99,7 +103,8 @@ int main(int argc, char *argv[]) {
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
 
-    printf("time of parallel part %lf s\n", 
+    printf("time of io %lf s, time of parallel part %lf s\n", 
+        (double)(end_io-start_io)/CLOCKS_PER_SEC),
         (double)(end_parallel-start_parallel)/CLOCKS_PER_SEC);
     
 

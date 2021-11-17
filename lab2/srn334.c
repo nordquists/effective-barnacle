@@ -100,8 +100,8 @@ int main(int argc, char *argv[]) {
     // printf("we used %d threads \n", threads);
 
     printf("time of io %lf ms, time of parallel part %lf ms\n", 
-        1000*((double)(end_io-start_io))/CLOCKS_PER_SEC,
-        1000*((double)(end_parallel-start_parallel))/CLOCKS_PER_SEC);
+        1000*((double)(end_io-start_io)),
+        1000*((double)(end_parallel-start_parallel)));
 
     return 0;
 }

@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     FILE * fp;
     int n, i;
     float scaled_bins;
-    int num_bins, num_threads, num_nums;
+    int num_bins, threads, num_nums;
     clock_t start_parallel, end_parallel;
     char filename[100]="";
     float* nums;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     } 
 
     num_bins = (unsigned int)atoi(argv[1]); 
-    num_threads = (unsigned int)atoi(argv[2]);
+    threads = (unsigned int)atoi(argv[2]);
 
     strcpy(filename, argv[3]);
 
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
     //     histogram[(int)(nums[i] * scaled_bins)]++;
     // }
 
-    #pragma omp parallel for num_threads(num_threads)
+    #pragma omp parallel for num_threads(threads)
     for(i = 0; i < num_nums; i++) {
         // We want to map our numbers from [0, 20] -> [0, num_bins]
         // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");

@@ -14,7 +14,7 @@ Read in file sequentially
 
 int main(int argc, char *argv[]) {
     FILE * fp;
-    int n, i;
+    int n, i, t;
     float scaled_bins;
     int num_bins, threads, num_nums;
     clock_t start_io, end_io, start_parallel, end_parallel;
@@ -57,22 +57,7 @@ int main(int argc, char *argv[]) {
 
     start_parallel = clock();
 
-    // #pragma omp parallel num_threads(threads)
-    // {
-    //     #pragma omp single
-    //     start_parallel = clock();
-
-    //     #pragma omp for reduction(+:histogram)
-    //     for(i = 0; i < num_nums; i++) {
-    //         // We want to map our numbers from [0, 20] -> [0, num_bins]
-    //         // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-    //         histogram[(int)(nums[i] * scaled_bins)]++;
-    //     }
-
-    //     #pragma omp single
-    //     end_parallel = clock();
-    // }
-
+   
     // #pragma omp parallel for num_threads(threads) reduction(+:histogram)
     // for(i = 0; i < num_nums; i++) {
     //     // We want to map our numbers from [0, 20] -> [0, num_bins]
@@ -80,20 +65,27 @@ int main(int argc, char *argv[]) {
     //     histogram[(int)(nums[i] * scaled_bins)]++;
     // }
 
-    #pragma omp parallel for num_threads(threads) reduction(+:histogram)
-    for(i = 0; i < num_nums; i++) {
-        // We want to map our numbers from [0, 20] -> [0, num_bins]
-        // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-        histogram[(int)(nums[i] * scaled_bins)]++;
+    int num_threads = threads; 
+
+    #pragma omp parallel 
+    {
+        __declspec (align(64)) int local_histogram[num_threads][num_bins];
+        int tid = omp_get_thread_num(); 
+
+        #pragma omp for 
+        for(int i = 0; i < page_size; i++) {
+            local_histogram[tid][(int)(nums[i] * scaled_bins)]++;
+        }
+
+        #pragma omp for
+        for(int i = 0; i < num_bins; i++) {
+            for(int t = 0; t < num_threads; t++) {
+                histogram[i] += local_histogram[t][i];
+            }
+        }
     }
 
-    // #pragma omp parallel for num_threads(threads)
-    // for(i = 0; i < num_nums; i++) {
-    //     // We want to map our numbers from [0, 20] -> [0, num_bins]
-    //     // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
-    //     #pragma omp atomic
-    //     histogram[(int)(nums[i] * scaled_bins)]++;
-    // }
+
 
     end_parallel = clock();
 

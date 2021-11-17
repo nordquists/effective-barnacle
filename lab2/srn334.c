@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
 
     #pragma omp parallel 
     {
-        __declspec (align(64)) int local_histogram[num_threads][num_bins];
+        int local_histogram[num_threads][num_bins];
         int tid = omp_get_thread_num(); 
 
         #pragma omp for 

@@ -69,7 +69,6 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel num_threads(threads)
     {
         int local_histogram[threads][num_bins];
-        #pragma omp single
         memset(local_histogram, 0, sizeof(local_histogram[0][0]) * threads * num_bins);
 
         int tid = omp_get_thread_num(); 

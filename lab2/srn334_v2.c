@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     //     int histogram_local = 
     // }
 
-    #pragma omp parallel
+    #pragma omp parallel num_threads(threads)
     {
         int histogram_private[num_bins];
         for(i=0; i<10; i++) histogram_private[i] = 0;

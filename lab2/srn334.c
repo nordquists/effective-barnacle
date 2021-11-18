@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
     float scaled_bins;
     int num_bins, threads, num_nums;
     clock_t start_io, end_io;
+    double start_io2, end_io2;
+
     double start_parallel, end_parallel;
 
     char filename[100]="";
@@ -37,6 +39,7 @@ int main(int argc, char *argv[]) {
 
     // START: IO Portion 
     start_io = clock();
+    start_io2 = omp_get_wtime(); 
 
     strcpy(filename, argv[3]);
 
@@ -54,6 +57,7 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     
     end_io = clock();
+    end_io2 = omp_get_wtime(); 
     // END: IO Portion 
 
     int histogram[num_bins];
@@ -65,8 +69,7 @@ int main(int argc, char *argv[]) {
    
     #pragma omp parallel for num_threads(threads) reduction(+:histogram)
     for(i = 0; i < num_nums; i++) {
-        // We want to map our numbers from [0, 20] -> [0, num_bins]
-        // if(nums[i] == 20.0) printf("Exact 20.0 found. \n");
+        // We want to map our numbers from [0, 20) -> [0, num_bins)
         histogram[(int)(nums[i] * scaled_bins)]++;
     }
 
@@ -80,6 +83,8 @@ int main(int argc, char *argv[]) {
     printf("time of io %lf s, time of parallel part %lf s\n", 
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),
             (end_parallel-start_parallel));
+    printf("time of io %lf s\n", 
+    (end_io2-start_io2));
 
     return 0;
 }

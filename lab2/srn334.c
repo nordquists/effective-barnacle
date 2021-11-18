@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
     // START: IO Portion 
     start_io = clock();
 
-    // strcpy(filename, argv[3]);
+    strcpy(filename, argv[3]);
 
-    if(!(fp = fopen(argv[3],"r"))) {
+    if(!(fp = fopen(filename,"r"))) {
         printf("Cannot create file %s\n", filename);
         exit(1);
     }
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     // Read all of the floating point numbers in
     n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
-    fclose(fp);
+    
     
     end_io = clock();
     // END: IO Portion 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),
             (end_parallel-start_parallel));
     // END: Printing run times 
-
+    fclose(fp);
     return 0;
 }
 

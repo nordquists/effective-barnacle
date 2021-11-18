@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
     // START: IO Portion 
     start_io = clock();
 
-    strcpy(filename, argv[3]);
+    // strcpy(filename, argv[3]);
 
-    if(!(fp = fopen(filename,"r"))) {
+    if(!(fp = fopen(argv[3],"r"))) {
         printf("Cannot create file %s\n", filename);
         exit(1);
     }

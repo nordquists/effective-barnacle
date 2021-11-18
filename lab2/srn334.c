@@ -18,13 +18,12 @@ int main(int argc, char *argv[]) {
     float scaled_bins;
     int num_bins, threads, num_nums;
     clock_t start_io, end_io;
-    double start_io2, end_io2;
-
     double start_parallel, end_parallel;
-
     char filename[100]="";
     float* nums;
 
+
+    // START: Reading in arguments
     if(argc != 4){
         printf("usage:  ./srn334 num_bins num_threads filename\n");
         printf("num_bins: the number of bins\n");
@@ -35,11 +34,10 @@ int main(int argc, char *argv[]) {
 
     num_bins = (unsigned int)atoi(argv[1]); 
     threads = (unsigned int)atoi(argv[2]);
-
+    // End: Reading in arguments
 
     // START: IO Portion 
     start_io = clock();
-    start_io2 = omp_get_wtime(); 
 
     strcpy(filename, argv[3]);
 
@@ -47,22 +45,25 @@ int main(int argc, char *argv[]) {
         printf("Cannot create file %s\n", filename);
         exit(1);
     }
-
+    
+    // Read the 'number of numbers' in first
     fscanf(fp, "%d", &num_nums);
 
     nums = malloc(num_nums * sizeof(int));
     
+    // Read all of the floating point numbers in
     n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
     fclose(fp);
     
     end_io = clock();
-    end_io2 = omp_get_wtime(); 
     // END: IO Portion 
 
+    // START: Initializing histogram data structure and helper variable
     int histogram[num_bins];
     for(i = 0; i < num_bins; i++) histogram[i] = 0;
-    scaled_bins = (float)num_bins / 20.0;
+    scaled_bins = (float)num_bins / 20.0; // We use this to help us map our numbers to the number of bins
+    // End: Initializing histogram data structure and helper variable
 
     // START: Parallel Portion
     start_parallel = omp_get_wtime(); 
@@ -76,15 +77,17 @@ int main(int argc, char *argv[]) {
     end_parallel = omp_get_wtime(); 
     // END: Parallel Portion
 
+    // START: Printing output
     for(i = 0; i < num_bins; i++) {
         printf("bin[%d] = %d\n", i, histogram[i]);
     }
+    // End: Printing output
 
+    // START: Printing run times 
     printf("time of io %lf s, time of parallel part %lf s\n", 
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),
             (end_parallel-start_parallel));
-    printf("time of io %lf s\n", 
-    (end_io2-start_io2));
+    // END: Printing run times 
 
     return 0;
 }

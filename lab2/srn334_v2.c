@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel num_threads(threads)
     {
         int histogram_private[num_bins];
-        for(i=0; i<10; i++) histogram_private[i] = 0;
+        for(i=0; i<num_bins; i++) histogram_private[i] = 0;
         #pragma omp for nowait
         for(i=0; i<num_nums; i++) {
             histogram_private[(int)(nums[i] * scaled_bins)]++;

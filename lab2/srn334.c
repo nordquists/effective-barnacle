@@ -1,11 +1,3 @@
-
-
-/*
-
-Read in file sequentially 
-
-
-*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

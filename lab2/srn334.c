@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     // Read all of the floating point numbers in
     n = 0;
     while (fscanf(fp, "%f", &nums[n++]) != EOF);
-    
+    fclose(fp);
     
     end_io = clock();
     // END: IO Portion 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
         ((double)(end_io-start_io)/CLOCKS_PER_SEC),
             (end_parallel-start_parallel));
     // END: Printing run times 
-    fclose(fp);
+
     return 0;
 }
 

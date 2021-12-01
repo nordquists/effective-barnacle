@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
 	cudaMemcpy(cd, c, size, cudaMemcpyHostToDevice);
 	
 	dim3 dimGrid(1);
-	dim3 dimBlock(1);
+	dim3 dimBlock(50);
 
 	// Kernal invocation
 	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd);

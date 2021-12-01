@@ -102,7 +102,7 @@ int main(int argc, char *argv[]){
 	// Kernal invocation
 	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd, n);
 
-	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(cd, c, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 
 	cudaFree(bd); 
 	cudaFree(cd);

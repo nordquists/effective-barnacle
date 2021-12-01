@@ -9,7 +9,7 @@
 #define TILE_WIDTH 10
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
-
+__global__ void vecGPU(float* ad, float* bd, float* cd, int width);
 /**** end of the kernel declaration ***/
 
 
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]){
 		5. bring the cd array back from the device and store it in c array (declared earlier in main)
 		6. free ad, bd, and cd
 	*/
-	int size = n * sizeof(float)
+	int size = n * sizeof(float);
 
 	cudaMalloc((void**) &ad, size);
 	cudaMemcpy(ad, a, size, cudaMemcpyHostToDevice);
@@ -131,7 +131,7 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 
 	for(int j = 0; j < width; j++) {
 		if(index + j < width) {
-			c_value += ad[index + j] * bd[index + j]
+			c_value += ad[index + j] * bd[index + j];
 		}
 	}
 

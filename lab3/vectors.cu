@@ -137,5 +137,5 @@ __global__ void vecGPU(float* ad, float* bd, float* cd) {
 	// 	c_value += ad[index] * bd[index];
 	// }
 
-	cd[index] = ad[index] * bd[index];
+	cd[index] += ad[index] * bd[index];
 }

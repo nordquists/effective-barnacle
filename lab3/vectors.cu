@@ -100,9 +100,9 @@ int main(int argc, char *argv[]){
 	dim3 dimBlock(1);
 
 	// Kernal invocation
-	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd, n);
+	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd);
 
-	cudaMemcpy(cd, c, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 
 	cudaFree(bd); 
 	cudaFree(cd);
@@ -124,7 +124,7 @@ int main(int argc, char *argv[]){
 
 
 /**** TODO: Write the kernel itself below this line *****/
-__global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
+__global__ void vecGPU(float* ad, float* bd, float* cd) {
 	// int index = blockIdx.x * width;
 	int index = threadIdx.x;
 

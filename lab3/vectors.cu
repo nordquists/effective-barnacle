@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
 	dim3 dimBlock(TILE_WIDTH);
 
 	// Kernal invocation
-	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd, TILE_WIDTH);
+	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd, n);
 
 	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 
@@ -126,5 +126,6 @@ int main(int argc, char *argv[]){
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 	int index = blockIdx.x * TILE_WIDTH + threadIdx.x;
 
-	cd[index] += ad[index] * bd[index];
+	if(index < width)
+		cd[index] += ad[index] * bd[index];
 }

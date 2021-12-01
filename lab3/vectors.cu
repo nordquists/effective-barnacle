@@ -125,13 +125,64 @@ int main(int argc, char *argv[]){
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
+	int additional_work = 0;
 	int calcs_per_thead = width / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
 	int index = (blockIdx.x * THREADS_PER_BLOCK + threadIdx.x) * calcs_per_thead;
 
+	if(blockIdx.x == BLOCKS_PER_GRID - 1) {
+		// We are in the last block
+		if(width > BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead){
+			additional_work = width % (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
+		}
+	}
+
 	for(int j = 0; j < calcs_per_thead; j++) {
+		if(j < additional_work) {
+			cd[index + calcs_per_thead + j] += ad[index + calcs_per_thead + j] * bd[index + calcs_per_thead + j];
+		}
 		cd[index + j] += ad[index + j] * bd[index + j];
 	}
 
 	// if(index < width)
 	// cd[index] += ad[index] * bd[index];
 }
+
+/**
+
+1,000,000 width
+
+
+4 blocks
+500 threads per block
+
+2000 threads in total
+
+Each thread needs to do 500 calculations
+
+
+
+2002 entries
+4 blocks
+500 threads per block
+2000 threads in total
+
+Each thread needs to do 1 calculation 
+
+BUT there are two extra entries at the end, when we are in the last block we need to recognize
+that and assign that work to two threads.
+
+
+if in last block:
+	if n > num_blocks*threads_per_block*work_per_thread:
+		additional_work = n % num_blocks*threads_per_block*work_per_thread; // in this case this will be 2
+
+
+for (...)
+	if j < additional_work:
+		// We behave as if there is an additional thread.
+		cd[index + calcs_per_thead + j] += ad[index + calcs_per_thead + j] * bd[index + calcs_per_thead + j];
+
+
+
+
+*/

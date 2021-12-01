@@ -125,9 +125,9 @@ int main(int argc, char *argv[]){
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
-	int index = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x * n / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
+	int index = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x * width / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
 
-	for(int j = 0; j < n / (BLOCKS_PER_GRID * THREADS_PER_BLOCK); j++) {
+	for(int j = 0; j < width / (BLOCKS_PER_GRID * THREADS_PER_BLOCK); j++) {
 		cd[index + j] += ad[index + j] * bd[index + j];
 	}
 

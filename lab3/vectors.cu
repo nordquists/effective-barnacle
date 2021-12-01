@@ -126,6 +126,6 @@ int main(int argc, char *argv[]){
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 	int index = blockIdx.x * TILE_WIDTH + threadIdx.x;
 
-	if(index < width)
-		cd[index] += ad[index] * bd[index];
+	// if(index < width)
+	cd[index] += ad[index] * bd[index];
 }

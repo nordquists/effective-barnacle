@@ -93,9 +93,9 @@ int main(int argc, char *argv[]){
 	cudaMemcpy(ad, a, size, cudaMemcpyHostToDevice);
 	cudaMalloc((void**) &bd, size);
 	cudaMemcpy(bd, b, size, cudaMemcpyHostToDevice);
-	
 	cudaMalloc((void**) &cd, size);
-
+	cudaMemcpy(cd, c, size, cudaMemcpyHostToDevice);
+	
 	dim3 dimGrid(1);
 	dim3 dimBlock(1);
 

@@ -5,7 +5,8 @@
 
 #define RANGE 11.79
 
-#define TILE_WIDTH 10
+#define BLOCKS_PER_GRID 4
+#define THREADS_PER_BLOCK 500
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width);
@@ -99,7 +100,7 @@ int main(int argc, char *argv[]){
 	// dim3 dimBlock(TILE_WIDTH);
 
 	// Kernal invocation
-	vecGPU<<<4, 500>>>(ad, bd, cd, n);
+	vecGPU<<<BLOCKS_PER_GRID, THREADS_PER_BLOCK>>>(ad, bd, cd, n);
 
 	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 
@@ -124,7 +125,7 @@ int main(int argc, char *argv[]){
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
-	int index = blockIdx.x * TILE_WIDTH + threadIdx.x;
+	int index = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x;
 
 	// if(index < width)
 	cd[index] += ad[index] * bd[index];

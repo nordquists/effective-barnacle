@@ -125,14 +125,16 @@ int main(int argc, char *argv[]){
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
-	int index = blockIdx.y * width;
+	// int index = blockIdx.x * width;
+	int index = blockIdx.x;
 
 	float c_value = 0;
 
 	for(int j = 0; j < width; j++) {
-		if(index + j < width) {
-			c_value += ad[index + j] * bd[index + j];
-		}
+		// if(index + j < width) {
+		// 	c_value += ad[index + j] * bd[index + j];
+		// }
+		c_value += ad[j] * bd[j];
 	}
 
 	cd[index] = c_value;

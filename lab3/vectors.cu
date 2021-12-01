@@ -126,7 +126,7 @@ int main(int argc, char *argv[]){
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 	// int index = blockIdx.x * width;
-	int index = blockIdx.x;
+	int index = threadIdx.x;
 
 	// float c_value = 0;
 

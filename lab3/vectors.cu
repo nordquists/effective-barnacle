@@ -95,11 +95,11 @@ int main(int argc, char *argv[]){
 	cudaMalloc((void**) &cd, size);
 	cudaMemcpy(cd, c, size, cudaMemcpyHostToDevice);
 	
-	dim3 dimGrid(n/TILE_WIDTH);
-	dim3 dimBlock(TILE_WIDTH);
+	// dim3 dimGrid(n / TILE_WIDTH);
+	// dim3 dimBlock(TILE_WIDTH);
 
 	// Kernal invocation
-	vecGPU<<<dimGrid, dimBlock>>>(ad, bd, cd, n);
+	vecGPU<<<4, 500>>>(ad, bd, cd, n);
 
 	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 

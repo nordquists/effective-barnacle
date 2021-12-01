@@ -128,14 +128,14 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 	// int index = blockIdx.x * width;
 	int index = blockIdx.x;
 
-	float c_value = 0;
+	// float c_value = 0;
 
-	for(int j = 0; j < width; j++) {
-		// if(index + j < width) {
-		// 	c_value += ad[index + j] * bd[index + j];
-		// }
-		c_value += ad[j] * bd[j];
-	}
+	// for(int j = 0; j < width; j++) {
+	// 	// if(index + j < width) {
+	// 	// 	c_value += ad[index + j] * bd[index + j];
+	// 	// }
+	// 	c_value += ad[index] * bd[index];
+	// }
 
-	cd[index] = c_value;
+	cd[index] = ad[index] * bd[index];
 }

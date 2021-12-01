@@ -9,7 +9,7 @@
 #define TILE_WIDTH 10
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
-__global__ void vecGPU(float* ad, float* bd, float* cd, int width);
+__global__ void vecGPU(float* ad, float* bd, float* cd);
 /**** end of the kernel declaration ***/
 
 

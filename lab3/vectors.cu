@@ -135,7 +135,7 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 			additional_work = width - (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
 
 			if(threadIdx.x < additional_work) {
-				cd[index + THREADS_PER_BLOCK + threadIdx.x] += ad[index + calcs_per_thead + threadIdx.x] * bd[index + THREADS_PER_BLOCK + threadIdx.x];
+				cd[index + THREADS_PER_BLOCK + threadIdx.x] += ad[index + THREADS_PER_BLOCK + threadIdx.x] * bd[index + THREADS_PER_BLOCK + threadIdx.x];
 			}
 		}
 	}

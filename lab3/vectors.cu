@@ -131,10 +131,11 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 
 	if(blockIdx.x == BLOCKS_PER_GRID - 1) {
 		// We are in the last block
-		if(width > BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead){
+		if(width > BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead) {
 			additional_work = width - (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
 
 			if(threadIdx.x < additional_work) {
+				printf("______________________SDFSDFSDFD________");
 				cd[index + THREADS_PER_BLOCK + threadIdx.x] += ad[index + THREADS_PER_BLOCK + threadIdx.x] * bd[index + THREADS_PER_BLOCK + threadIdx.x];
 			}
 		}

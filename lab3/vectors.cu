@@ -5,8 +5,8 @@
 
 #define RANGE 11.79
 
-#define BLOCKS_PER_GRID 4
-#define THREADS_PER_BLOCK 500
+#define BLOCKS_PER_GRID 16
+#define THREADS_PER_BLOCK 250
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width);
@@ -127,32 +127,14 @@ int main(int argc, char *argv[]){
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
-	int additional_work = 0;
 	int calcs_per_thead = width / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
 	int index = (blockIdx.x * THREADS_PER_BLOCK + threadIdx.x) * calcs_per_thead;
-
 	int global_id = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x;
-
-	additional_work = width - (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
+	int additional_work = width - (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
 
 	if(global_id < additional_work) {
-		// printf("______________________doing extra______________________\n");
 		cd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id] += ad[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id] * bd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id];
 	}
-	
-	// // This section is for work outside the 500 increments, e.g. 3543, it should handle the 43
-	// if(blockIdx.x == BLOCKS_PER_GRID - 1) {
-	// 	// We are in the last block, so we can spread out the additional work across the threads
-	// 	// in this block, 1 addition item to do per thread (as there is additional work).
-	// 	if(width > BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead) {
-	// 		additional_work = width - (BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead);
-
-	// 		if(threadIdx.x < additional_work) {
-	// 			printf("______________________SDFSDFSDFD______________________\n");
-	// 			cd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] += ad[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] * bd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x];
-	// 		}
-	// 	}
-	// }
 
 	for(int j = 0; j < calcs_per_thead; j++) {
 		cd[index + j] += ad[index + j] * bd[index + j];

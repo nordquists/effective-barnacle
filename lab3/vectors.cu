@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
 	cudaMalloc((void**) &cd, size);
 	cudaMemcpy(cd, c, size, cudaMemcpyHostToDevice);
 
-	int calcs_per_thead = width / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
+	int calcs_per_thead = n / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
 
 	// Kernal invocation
 	vecGPU<<<BLOCKS_PER_GRID, THREADS_PER_BLOCK>>>(ad, bd, cd, calcs_per_thead, n);

@@ -5,7 +5,7 @@
 
 #define RANGE 11.79
 
-#define BLOCKS_PER_GRID 8
+#define BLOCKS_PER_GRID 16
 #define THREADS_PER_BLOCK 500
 
 /*** TODO: insert the declaration of the kernel function below this line ***/

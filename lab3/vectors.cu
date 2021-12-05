@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
 		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
 	//   if(temp[i] != c[i])
 	// 	printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
-	printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
+		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
 		
 	// Free the arrays in the host
 	free(a); free(b); free(c); free(temp);

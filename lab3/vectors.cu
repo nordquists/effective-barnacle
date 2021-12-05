@@ -112,13 +112,13 @@ int main(int argc, char *argv[]){
 	/******************  The end of the GPU part: Do not modify anything in main() below this line  ************/
 	
 	//checking the correctness of the GPU part
-	for(i = 0; i < n; i++)
+	for(i = 0; i < n; i++) {
 	  if(temp[i] - c[i] > 0.001 || temp[i] - c[i] < -0.001 )
 		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
 	//   if(temp[i] != c[i])
 	// 	printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
-		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
-		
+      printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
+	}
 	// Free the arrays in the host
 	free(a); free(b); free(c); free(temp);
 

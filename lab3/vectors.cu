@@ -137,7 +137,7 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 
 	if(global_id < additional_work) {
 		printf("______________________doing extra______________________\n");
-		cd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] += ad[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] * bd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x];
+		cd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id] += ad[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id] * bd[BLOCKS_PER_GRID*THREADS_PER_BLOCK*calcs_per_thead + global_id];
 	}
 	
 	// // This section is for work outside the 500 increments, e.g. 3543, it should handle the 43

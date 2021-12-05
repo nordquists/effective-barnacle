@@ -96,10 +96,10 @@ int main(int argc, char *argv[]){
 	cudaMalloc((void**) &cd, size);
 	cudaMemcpy(cd, c, size, cudaMemcpyHostToDevice);
 
-	int calcs_per_thead = n / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
+	int calcs_per_thread = n / (BLOCKS_PER_GRID * THREADS_PER_BLOCK);
 
 	// Kernal invocation
-	vecGPU<<<BLOCKS_PER_GRID, THREADS_PER_BLOCK>>>(ad, bd, cd, calcs_per_thead, n);
+	vecGPU<<<BLOCKS_PER_GRID, THREADS_PER_BLOCK>>>(ad, bd, cd, calcs_per_thread, n);
 
 	cudaMemcpy(c, cd, size, cudaMemcpyDeviceToHost);
 	cudaFree(ad); 
@@ -127,15 +127,15 @@ int main(int argc, char *argv[]){
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int calcs_per_thread, int width) {
 	int global_id = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x;
-	int index = global_id * calcs_per_thead;
-	int temp = BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thead;
+	int index = global_id * calcs_per_thread;
+	int temp = BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thread;
 	int additional_work = width - temp;
 
 	if(global_id < additional_work) {
 		cd[temp + global_id] += ad[temp + global_id] * bd[temp + global_id];
 	}
 
-	for(int j = 0; j < calcs_per_thead; j++) {
+	for(int j = 0; j < calcs_per_thread; j++) {
 		cd[index + j] += ad[index + j] * bd[index + j];
 	}
 }

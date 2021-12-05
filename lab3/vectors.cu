@@ -145,7 +145,7 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 	}
 
 	for(int j = 0; j < calcs_per_thead; j++) {
-		cd[index + j] += ad[index + j] * bd[index + j] + 100;
+		cd[index + j] += ad[index + j] * bd[index + j] * 100;
 	}
 
 	// if(index < width)

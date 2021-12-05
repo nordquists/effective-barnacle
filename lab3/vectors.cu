@@ -9,7 +9,7 @@
 #define THREADS_PER_BLOCK 250
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
-__global__ void vecGPU(float* ad, float* bd, float* cd, int width);
+__global__ void vecGPU(float* ad, float* bd, float* cd, int calcs_per_thead, int width);
 /**** end of the kernel declaration ***/
 
 

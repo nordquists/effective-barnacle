@@ -5,8 +5,8 @@
 
 #define RANGE 11.79
 
-#define BLOCKS_PER_GRID 16
-#define THREADS_PER_BLOCK 250
+#define BLOCKS_PER_GRID 4
+#define THREADS_PER_BLOCK 500
 
 /*** TODO: insert the declaration of the kernel function below this line ***/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int calcs_per_thead, int width);
@@ -112,17 +112,14 @@ int main(int argc, char *argv[]){
 	
 	//checking the correctness of the GPU part
 	for(i = 0; i < n; i++) {
-	  if(temp[i] - c[i] > 0.001 || temp[i] - c[i] < -0.001 )
+	  if(temp[i] != c[i])
 		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
-	//   if(temp[i] != c[i])
-	// 	printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
 	}
 	// Free the arrays in the host
 	free(a); free(b); free(c); free(temp);
 
 	return 0;
 }
-
 
 /**** TODO: Write the kernel itself below this line *****/
 __global__ void vecGPU(float* ad, float* bd, float* cd, int calcs_per_thread, int width) {

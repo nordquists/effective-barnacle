@@ -128,11 +128,11 @@ int main(int argc, char *argv[]){
 __global__ void vecGPU(float* ad, float* bd, float* cd, int calcs_per_thread, int width) {
 	int global_id = blockIdx.x * THREADS_PER_BLOCK + threadIdx.x;
 	int index = global_id * calcs_per_thread;
-	int temp = BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thread;
-	int additional_work = width - temp;
+	int base_work = BLOCKS_PER_GRID * THREADS_PER_BLOCK * calcs_per_thread;
+	int additional_work = width - base_work;
 
 	if(global_id < additional_work) {
-		cd[temp + global_id] += ad[temp + global_id] * bd[temp + global_id];
+		cd[base_work + global_id] += ad[base_work + global_id] * bd[base_work + global_id];
 	}
 
 	for(int j = 0; j < calcs_per_thread; j++) {

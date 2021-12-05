@@ -138,7 +138,7 @@ __global__ void vecGPU(float* ad, float* bd, float* cd, int width) {
 
 			if(threadIdx.x < additional_work) {
 				printf("______________________SDFSDFSDFD______________________\n");
-				cd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] += ad[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] * bd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] + 0.001;
+				cd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] += ad[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] * bd[index + THREADS_PER_BLOCK*calcs_per_thead + threadIdx.x] + 0.002;
 			}
 		}
 	}

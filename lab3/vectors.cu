@@ -68,14 +68,11 @@ int main(int argc, char *argv[]){
 	}
 
     //The sequential part
-	time_t start1 = time(NULL);
-
 	start = clock();
 	for(i = 0; i < n; i++)
 		temp[i] += a[i] * b[i];
 	end = clock();
 	printf("Total time taken by the sequential part = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
-	printf("%d \n", (time(NULL) - start1));
     /******************  The start GPU part: Do not modify anything in main() above this line  ************/
 	//The GPU part
 	start = clock();
@@ -113,10 +110,10 @@ int main(int argc, char *argv[]){
 	/******************  The end of the GPU part: Do not modify anything in main() below this line  ************/
 	
 	//checking the correctness of the GPU part
-	// for(i = 0; i < n; i++) {
-	//   if(temp[i] != c[i])
-	// 	printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
-	// }
+	for(i = 0; i < n; i++) {
+	  if(temp[i] != c[i])
+		printf("Element %d in the result array does not match the sequential version (%lf vs. %lf)\n", i, c[i], temp[i]);
+	}
 	// Free the arrays in the host
 	free(a); free(b); free(c); free(temp);
 

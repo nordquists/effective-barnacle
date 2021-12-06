@@ -74,9 +74,8 @@ int main(int argc, char *argv[]){
 	for(i = 0; i < n; i++)
 		temp[i] += a[i] * b[i];
 	end = clock();
-	sleep(1);
 	printf("Total time taken by the sequential part = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
-	printf("%lf\n", (double)(time(NULL) - start1));
+	printf("%d \n", (time(NULL) - start1));
     /******************  The start GPU part: Do not modify anything in main() above this line  ************/
 	//The GPU part
 	start = clock();
